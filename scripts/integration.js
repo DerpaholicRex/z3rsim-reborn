@@ -223,9 +223,8 @@ async function generateNewSeed() {
             navbarButton.style.pointerEvents = 'none';
         }
 
-        var proxyUrl = 'https://api.allorigins.win/raw?url=';
-        var targetUrl = 'https://alttpr.com/api/randomizer';
-        var fullUrl = proxyUrl + encodeURIComponent(targetUrl);
+        var proxyUrl = 'https://z3r-proxy.derpaholicrex.workers.dev';
+        var fullUrl = proxyUrl + '/api/randomizer';
 
         var formValues = getFormValues();
 
@@ -255,7 +254,7 @@ async function generateNewSeed() {
             }
         };
 
-        console.log('📡 Calling alttpr.com API via All Origins proxy...');
+        console.log('📡 Calling alttpr.com API via OCI CORS proxy...');
 
         var response = await fetch(fullUrl, {
             method: 'POST',
