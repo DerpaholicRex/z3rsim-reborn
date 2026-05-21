@@ -1,4 +1,4 @@
-# Z3R Simulator - Deobfuscated Source
+# Z3R Simulator - Deobfuscated Source (Offline Fork)
 
 A reconstructed TypeScript source tree for **Z3R Simulator**, a tool
 for simulating Zelda: A Link to the Past Randomizer runs, originally
@@ -6,16 +6,11 @@ published at
 [z3rsim.com](https://z3rsim.com/) by
 [Kyong92](https://www.twitch.tv/kyong92).
 
-The original source was never released. This project takes the public
-production bundle (`main.c8df59dcefef6190165d.bundle.js`), unminifies
-and splits it, and rebuilds it into readable Angular 4 TypeScript -
-with the original file structure, decorators, and templates recovered.
-
-The result builds with Angular CLI and runs locally as a static site.
-It's meant as a friendly **starting point** for anyone in the community
-who wants to fork, study, or modernize the simulator.
-
----
+This fork adds **offline/fork functionality** including:
+- **Load Spoiler Log** - upload spoiler logs from [alttpr.com](https://alttpr.com/en/randomizer)
+- **Generate Seed** - generate new seeds via proxy
+- **GitHub Pages support** - SPA redirect (404.html) and dynamic base href
+- Convenience scripts for local hosting
 
 ## Status
 
@@ -30,8 +25,6 @@ who wants to fork, study, or modernize the simulator.
   depends on Node APIs that were removed). Use `ng build` and serve
   the `dist/` folder with any static HTTP server.
 
----
-
 ## Requirements
 
 - **Node 8** - pinned in `.nvmrc` (Angular CLI 1.4.10 requires it)
@@ -39,29 +32,25 @@ who wants to fork, study, or modernize the simulator.
 - A static HTTP server for viewing the build (Python's `http.server`
   works fine)
 
----
-
-## Build & Run
+## Quick Start (Local)
 
 ```bash
-# use the pinned Node version
+# Option A: Build with Angular CLI
 nvm install 8
 nvm use 8
-
-# install deps
 npm install
+npm run build        # build to dist/
 
-# build
-npm run build        # development build -> dist/
-npm run build:prod   # production build (AOT + minification)
-
-# serve the build
+# Serve the dist/ folder
 cd dist
 python3 -m http.server 8000
-# open http://localhost:8000
-```
+# Open http://localhost:8000
 
----
+# Option B: Run directly via convenience script
+# (requires dist/ to be built first, or serve the repo root after running the app)
+runSite.bat     # Windows
+./runSite.sh    # Linux/macOS
+```
 
 ## Project Layout
 
@@ -84,16 +73,21 @@ src/
 assets/                   PNGs (item/dungeon/map icons)
 hotfix/                   JSON data (item map, location map, spoiler log)
 fonts/                    Font Awesome + Hammersmith One
-scripts/                  helper scripts (generateItemArray, spoilerLogAdapter, …)
-.angular-cli.json         build config (copies assets, hotfix, fonts, vendor JS)
+scripts/                  Helper scripts (offline integration, item array generation)
+  generateItemArray.js         Maps spoiler log items to the game's item array
+  generateSeedMetadataPrefix.js Generates seed metadata prefix from spoiler log
+  spoilerLogAdapter.js         Adapter for loading spoiler logs from localStorage/file
+  integration.js               DOM integration: navbar buttons, seed generation UI, notifications
+.angular-cli.json         build config (copies assets, hotfix, fonts, vendor JS, scripts)
 package.json              Angular 4.3.6 deps pinned
 .nvmrc                    Node 8
+404.html                  GitHub Pages SPA redirect
+runSite.bat               Windows convenience script
+runSite.sh                Unix convenience script
 ```
 
 The app builds into a self-contained `dist/` that can be served from
 any static host.
-
----
 
 ## Deobfuscation Notes
 
@@ -115,8 +109,6 @@ An added banner on the app homepage notes the pre-2019 seed-format issue.
 
 Everything else matches the original bundle.
 
----
-
 ## Credits
 
 Original simulator by **Kyong92** -
@@ -136,26 +128,11 @@ simulator was built against.
 If Kyong would like this repository taken down or updated in any way,
 please open an issue and it will be honored.
 
----
-
 ## Contributing
 
 Please limit contributions to any errors found that don't reflect the
 original source code. Any modernization should be copied / forked from
 this into its own project.
-
----
-
-## Potential Directions for Future Projects
-
-- Update seed handling to the current [alttpr.com](https://alttpr.com/)
-  API so modern seeds load
-- Upgrade Angular to a supported version (would also restore
-  `ng serve`)
-- Replace the deprecated `@angular/http` with `HttpClient`
-- Add a modern bundler toolchain
-
----
 
 ## License
 

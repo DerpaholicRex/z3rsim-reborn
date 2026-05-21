@@ -1,9 +1,37 @@
 <!DOCTYPE html>
+<script>
+  // Single Page Apps for GitHub Pages
+  // MIT License
+  // https://github.com/rafgraph/spa-github-pages
+  // This script checks to see if a redirect is present in the query string,
+  // converts it back to the correct url and adds it to the
+  // browser's history using window.history.replaceState(...),
+  // which won't cause the browser to attempt to load the new url.
+  // When the single page app is loaded further down in this file,
+  // the correct url will be waiting in the browser's history for
+  // the single page app to route accordingly.
+  (function(l) {
+    if (l.search[1] === '/' ) {
+      var decoded = l.search.slice(1).split('&').map(function(s) {
+        return s.replace(/~and~/g, '&')
+      }).join('?');
+      window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+      );
+    }
+  }(window.location))
+</script>
+<script>
+  // Dynamically set base href based on current URL
+  const baseHref = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? '/'
+    : '/z3rsim_offline/';
+  document.write('<base href="' + baseHref + '">');
+</script>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Z3R Simulator</title>
-  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="icon" type="image/x-icon" href="assets/triforce.png">
@@ -13,19 +41,16 @@
   <link href="hammersmith-one.css" rel="stylesheet">
   <link href="font-awesome.min.css" rel="stylesheet">
 
-  <!-- [REMOVED] Google Analytics - original tracking for UA-100323559-2 (Kyong's account)
-  <script type="text/javascript" async="" src="js"></script>
-  <script async="" src="js_002"></script>
-  <script>window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-100323559-2');</script>
-  -->
-
   <script src="jquery-3.3.1.min.js"></script>
   <script src="bootstrap.min.js"></script>
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Helper scripts for spoiler log / seed generation -->
+  <script src="scripts/generateItemArray.js"></script>
+  <script src="scripts/generateSeedMetadataPrefix.js"></script>
+  <script src="scripts/spoilerLogAdapter.js"></script>
+  <script src="scripts/integration.js"></script>
 </body>
 </html>

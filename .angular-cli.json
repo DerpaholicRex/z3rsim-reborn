@@ -11,6 +11,7 @@
         { "glob": "**/*", "input": "../assets", "output": "./assets" },
         { "glob": "**/*", "input": "../hotfix", "output": "./hotfix" },
         { "glob": "**/*", "input": "../fonts", "output": "./fonts" },
+        { "glob": "**/*", "input": "../scripts", "output": "./scripts" },
         { "glob": "jquery-3.3.1.min.js", "input": "..", "output": "./" },
         { "glob": "bootstrap.min.js", "input": "..", "output": "./" },
         { "glob": "font-awesome.min.css", "input": "..", "output": "./" },
