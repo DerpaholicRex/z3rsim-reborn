@@ -14,25 +14,25 @@
     "spdy": "4.0.2"
   },
   "dependencies": {
-    "@angular/animations": "8.2.14",
-    "@angular/common": "8.2.14",
-    "@angular/compiler": "8.2.14",
-    "@angular/core": "8.2.14",
-    "@angular/forms": "8.2.14",
-    "@angular/platform-browser": "8.2.14",
-    "@angular/platform-browser-dynamic": "8.2.14",
-    "@angular/router": "8.2.14",
+    "@angular/animations": "9.1.13",
+    "@angular/common": "9.1.13",
+    "@angular/compiler": "9.1.13",
+    "@angular/core": "9.1.13",
+    "@angular/forms": "9.1.13",
+    "@angular/platform-browser": "9.1.13",
+    "@angular/platform-browser-dynamic": "9.1.13",
+    "@angular/router": "9.1.13",
     "bootstrap": "3.3.7",
-    "core-js": "2.5.1",
-    "ngx-bootstrap": "1.9.3",
-    "rxjs": "6.0.0",
-    "rxjs-compat": "6.6.7",
-    "zone.js": "0.8.26"
+    "core-js": "3.6.5",
+    "ngx-bootstrap": "5.6.2",
+    "rxjs": "6.5.4",
+    "rxjs-compat": "6.5.4",
+    "zone.js": "0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.29",
-    "@angular/cli": "~8.3.29",
-    "@angular/compiler-cli": "8.2.14",
-    "typescript": "3.5.3"
+    "@angular-devkit/build-angular": "~0.901.15",
+    "@angular/cli": "~9.1.15",
+    "@angular/compiler-cli": "9.1.13",
+    "typescript": "~3.7.5"
   }
 }
