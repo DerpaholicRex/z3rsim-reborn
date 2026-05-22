@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { ItemArrayService } from './item-array.service';
 
 @Injectable()
@@ -15,7 +13,7 @@ export class SeedService {
   lastSeed: { [key: string]: any };
 
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     private _itemArrayService: ItemArrayService
   ) {
     this._apiUrl = 'https://lttp-rando-seed-api.glitch.me/';
@@ -92,14 +90,15 @@ export class SeedService {
     if (online) {
       return this._http
         .get(url)
-        .map(function(response) {
-          var data = response.json();
-          this.lastSeedTimestamp = Date.now();
-          this.lastSeedParams = {};
-          this.lastSeed = data;
-          return data;
-        })
-        .catch(function(error) { return this.handleError(error); });
+        .pipe(
+          map((data: any) => {
+            this.lastSeedTimestamp = Date.now();
+            this.lastSeedParams = {};
+            this.lastSeed = data;
+            return data;
+          }),
+          catchError((error: any) => { return this.handleError(error); })
+        );
     } else {
       return offlineResult;
     }
@@ -119,9 +118,7 @@ export class SeedService {
 
   handleError(error: any) {
     console.error(error);
-    return Observable.throw(
-      error.json().error || 'Z3RSim seems to be offline. Please try again later.',
-    );
+    return throwError(error.error || 'Z3RSim seems to be offline. Please try again later.');
   }
 
   // ---- Native Angular helper methods (replaces spoilerLogAdapter.js + globals) ----

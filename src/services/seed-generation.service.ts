@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SeedGenerationService {
     private _proxyUrl = 'https://z3r-proxy.derpaholicrex.workers.dev';
 
-    constructor(private _http: Http) {}
+    constructor(private _http: HttpClient) {}
 
     getFormValues(): any {
         try {
