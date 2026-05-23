@@ -1,5 +1,5 @@
-/* Note: original bundle uses url(^assets/...) (relative). The leading slash on
-   url(^assets/...) here is required so Angular CLI's webpack resolves asset
+/* Note: original bundle uses url(../../../assets/...) (relative). The leading slash on
+   url(../../../assets/...) here is required so Angular CLI's webpack resolves asset
    paths from the project root rather than relative to this CSS file. */
 .node {
   position:absolute;
@@ -23,7 +23,7 @@
 }
 
 .warp {
-  background-image:url(^assets/node-icons/warp.png)
+  background-image:url(../../../assets/node-icons/warp.png)
 }
 
 .tr-ledge, .warp {
@@ -32,7 +32,7 @@
 }
 
 .tr-ledge {
-  background-image:url(^assets/dungeon-tracker-icons/boss92.png)
+  background-image:url(../../../assets/dungeon-tracker-icons/boss92.png)
 }
 
 .invisible {
@@ -115,15 +115,15 @@
 }
 
 .open-door {
-  background-image:url(^assets/node-icons/open_door.png)
+  background-image:url(../../../assets/node-icons/open_door.png)
 }
 
 .sk-door {
-  background-image:url(^assets/node-icons/key_door.png)
+  background-image:url(../../../assets/node-icons/key_door.png)
 }
 
 .bk-door {
-  background-image:url(^assets/node-icons/big_door.png)
+  background-image:url(../../../assets/node-icons/big_door.png)
 }
 
 .closed-chest, .open-chest {
@@ -133,11 +133,11 @@
 }
 
 .closed-chest {
-  background-image:url(^assets/node-icons/closed_chest.png)
+  background-image:url(../../../assets/node-icons/closed_chest.png)
 }
 
 .open-chest {
-  background-image:url(^assets/node-icons/open_chest.png)
+  background-image:url(../../../assets/node-icons/open_chest.png)
 }
 
 .big-chest, .open-big-chest {
@@ -147,104 +147,104 @@
 }
 
 .big-chest {
-  background-image:url(^assets/node-icons/closed_big_chest.png)
+  background-image:url(../../../assets/node-icons/closed_big_chest.png)
 }
 
 .open-big-chest {
-  background-image:url(^assets/node-icons/open_big_chest.png)
+  background-image:url(../../../assets/node-icons/open_big_chest.png)
 }
 
 .spare-key {
-  background-image:url(^assets/node-icons/small_key.png)
+  background-image:url(../../../assets/node-icons/small_key.png)
 }
 
 .blind {
-  background-image:url(^assets/node-icons/blind.png)
+  background-image:url(../../../assets/node-icons/blind.png)
 }
 
 .switch-blue {
-  background-image:url(^assets/node-icons/switch_blue.png)
+  background-image:url(../../../assets/node-icons/switch_blue.png)
 }
 
 .switch-red {
-  background-image:url(^assets/node-icons/switch_red.png)
+  background-image:url(../../../assets/node-icons/switch_red.png)
 }
 
 .water-switch-off {
-  background-image:url(^assets/node-icons/water_switch_off.png)
+  background-image:url(../../../assets/node-icons/water_switch_off.png)
 }
 
 .water-switch-on {
-  background-image:url(^assets/node-icons/water_switch_on.png)
+  background-image:url(../../../assets/node-icons/water_switch_on.png)
 }
 
 .tt-floor {
-  background-image:url(^assets/node-icons/tt_floor_closed.png)
+  background-image:url(../../../assets/node-icons/tt_floor_closed.png)
 }
 
 .tt-floor-open {
-  background-image:url(^assets/node-icons/tt_floor_open.png)
+  background-image:url(../../../assets/node-icons/tt_floor_open.png)
 }
 
 .push-block {
-  background-image:url(^assets/node-icons/push-block.png)
+  background-image:url(../../../assets/node-icons/push-block.png)
 }
 
 .empty {
-  background-image:url(^assets/node-icons/empty.png)
+  background-image:url(../../../assets/node-icons/empty.png)
 }
 
 .portal {
-  background-image:url(^assets/node-icons/warp.png)
+  background-image:url(../../../assets/node-icons/warp.png)
 }
 
 .mirror {
   border-radius:50%;
-  background-image:url(^assets/item-icons/mirror.png)
+  background-image:url(../../../assets/item-icons/mirror.png)
 }
 
 .frog {
-  background-image:url(^assets/node-icons/frog.png)
+  background-image:url(../../../assets/node-icons/frog.png)
 }
 
 .purple-chest {
-  background-image:url(^assets/node-icons/purple-chest.png)
+  background-image:url(../../../assets/node-icons/purple-chest.png)
 }
 
 .big-bomb {
-  background-image:url(^assets/node-icons/big-bomb.png)
+  background-image:url(../../../assets/node-icons/big-bomb.png)
 }
 
 .tablet {
-  background-image:url(^assets/node-icons/tablet.png)
+  background-image:url(../../../assets/node-icons/tablet.png)
 }
 
 .pedestal {
-  background-image:url(^assets/node-icons/pedestal.png)
+  background-image:url(../../../assets/node-icons/pedestal.png)
 }
 
 .hint-tile {
-  background-image:url(^assets/node-icons/hint_tile.png)
+  background-image:url(../../../assets/node-icons/hint_tile.png)
 }
 
 .big-hint-tile {
-  background-image:url(^assets/item-icons/hintTile.png)
+  background-image:url(../../../assets/item-icons/hintTile.png)
 }
 
 .sign {
-  background-image:url(^assets/item-icons/sign.png)
+  background-image:url(../../../assets/item-icons/sign.png)
 }
 
 .duck {
-  background-image:url(^assets/node-icons/duck.png)
+  background-image:url(../../../assets/node-icons/duck.png)
 }
 
 .hole {
-  background-image:url(^assets/node-icons/hole.png)
+  background-image:url(../../../assets/node-icons/hole.png)
 }
 
 .water-warp {
-  background-image:url(^assets/node-icons/water-warp.png)
+  background-image:url(../../../assets/node-icons/water-warp.png)
 }
 
 .sq-item {
@@ -255,15 +255,15 @@
 }
 
 .lw-linkshouse {
-  background-image:url(^assets/node-icons/links_house.png)
+  background-image:url(../../../assets/node-icons/links_house.png)
 }
 
 .hc-sanctuary {
-  background-image:url(^assets/node-icons/sanctuary.png)
+  background-image:url(../../../assets/node-icons/sanctuary.png)
 }
 
 .lw-flute1 {
-  background-image:url(^assets/node-icons/mountain_cave.png)
+  background-image:url(../../../assets/node-icons/mountain_cave.png)
 }
 
 .boss, .defeated-boss {
