@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter, isDevMode } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, NgIf } from '@angular/common';
 import { GameService } from '../../services/game.service';
 import { SeedService } from '../../services/seed.service';
 import { ItemNamesService } from '../../services/item-names.service';
@@ -8,12 +8,18 @@ import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
 import { NodeStatus } from '../../models/node-status.enum';
+import { ItemTrackerComponent } from '../item-tracker/item-tracker.component';
+import { DungeonItemsComponent } from '../dungeon-items/dungeon-items.component';
+import { ItemLogComponent } from '../item-log/item-log.component';
+import { OptionsComponent } from '../options/options.component';
+import { GameMenuComponent } from '../game-menu/game-menu.component';
+import { EndStatsComponent } from '../end-stats/end-stats.component';
 
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.css'],
-    standalone: false
+    imports: [NgIf, ItemTrackerComponent, DungeonItemsComponent, ItemLogComponent, OptionsComponent, GameMenuComponent, EndStatsComponent]
 })
 export class GameComponent implements OnInit {
   modeSelected: string;

@@ -3,8 +3,7 @@ import { ItemNamesService } from '../services/item-names.service';
 
 @Pipe({
     name: 'itemLogFilter',
-    pure: false,
-    standalone: false
+    pure: false
 })
 export class ItemLogFilterPipe implements PipeTransform {
   constructor(private _itemNamesService: ItemNamesService) {}

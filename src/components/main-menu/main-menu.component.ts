@@ -1,12 +1,17 @@
 import { SeedService } from '../../services/seed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ButtonRadioDirective } from 'ngx-bootstrap/buttons';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgStyle, NgClass, NgFor } from '@angular/common';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { AlertComponent } from 'ngx-bootstrap/alert';
 
 @Component({
     selector: 'app-main-menu',
     templateUrl: './main-menu.component.html',
     styleUrls: ['./main-menu.component.css'],
-    standalone: false
+    imports: [ButtonRadioDirective, FormsModule, NgIf, PopoverDirective, NgStyle, NgClass, AlertComponent, NgFor]
 })
 export class MainMenuComponent implements OnInit {
   generationType: string;

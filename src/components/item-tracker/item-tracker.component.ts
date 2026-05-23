@@ -3,12 +3,14 @@ import { Component, OnInit, Input, isDevMode } from '@angular/core';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
+import { NgFor, NgClass } from '@angular/common';
+import { TrackerNodeComponent } from '../tracker-node/tracker-node.component';
 
 @Component({
     selector: 'app-item-tracker',
     templateUrl: './item-tracker.component.html',
     styleUrls: ['./item-tracker.component.css'],
-    standalone: false
+    imports: [NgFor, TrackerNodeComponent, NgClass]
 })
 export class ItemTrackerComponent implements OnInit {
   itemsToTrack: string[];

@@ -1,12 +1,13 @@
 import { ItemNamesService } from '../../services/item-names.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Items } from '../../models/items.model';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-item-line',
     templateUrl: './item-line.component.html',
     styleUrls: ['./item-line.component.css'],
-    standalone: false
+    imports: [NgIf]
 })
 export class ItemLineComponent implements OnInit {
   bookLocations: string[];
