@@ -8,13 +8,12 @@ This is a fork of the Z3R Simulator (Zelda: A Link to the Past Randomizer Simula
 - **Upstream (deobfuscated source)**: `https://github.com/eclectic-sh/z3rsim-deobfuscated.git`
 
 ## Tech Stack
-- **Angular 4.3.6** (not Angular 2+ in the modern sense - this is the old Angular)
-- **TypeScript 2.4.2**
-- **Angular CLI 1.4.10**
-- **Node 8** required for `ng serve` (older webpack-dev-server@2 doesn't work on modern Node)
-- **Bootstrap 3.3.7** via ngx-bootstrap 1.9.3
+- **Angular 14.2.0**
+- **TypeScript 4.7.4**
+- **Angular CLI 14.2.0**
+- **Node 16/18+**
+- **Bootstrap 3.3.7** via ngx-bootstrap 5.6.2
 - **jQuery 3.3.1** (loaded globally in index.html)
-- Packages: `@angular/*`, `rxjs 5.4.3`, `zone.js 0.8.16`, `core-js 2.5.1`
 
 ## Project Structure
 ```
@@ -22,32 +21,19 @@ deobfuscated/
 ├── src/                          # Angular app source
 │   ├── index.html                # App shell (compiled by Angular CLI)
 │   ├── main.ts                   # Bootstrap entry
-│   ├── app.module.ts             # NgModule (18 declarations)
+│   ├── app.module.ts             # NgModule
 │   ├── app-routing.module.ts     # Routes
 │   ├── components/               # ~18 components (.ts + .html + .css each)
-│   │   ├── app/                  # Root app component (navbar, footer)
-│   │   ├── main-menu/            # Seed generation form (Play button)
-│   │   ├── game/                 # Main gameplay screen
-│   │   ├── item-tracker/         # Item tracking UI
-│   │   └── ...                   # Other components
 │   ├── services/                 # Injectable services
-│   │   ├── seed.service.ts       # SEED LOADING - reads localStorage.getItem('seedHash'), localStorage.getItem('itemArray'), localStorage.getItem('seedMetadataPrefix')
-│   │   ├── game.service.ts       # Game state management
-│   │   ├── seed-parser.service.ts # Parses seed data into game format
-│   │   └── ...                   # Other services
 │   ├── models/                   # TypeScript models/enums
 │   ├── dungeons/                 # 15 dungeon setup files
 │   └── data/                     # Light/Dark world location tables
-├── scripts/                      # Helper scripts (loaded as-is, not compiled)
-│   ├── generateItemArray.js      # Maps spoiler log items to game item array
-│   ├── generateSeedMetadataPrefix.js # Generates seed metadata prefix
-│   ├── spoilerLogAdapter.js      # Adapter for localStorage spoiler log loading
-│   └── integration.js            # DOM integration: navbar buttons, seed gen UI, notifications
+├── scripts/                      # Helper scripts (loaded as-is)
 ├── assets/                       # PNGs (item/dungeon/map icons)
 ├── hotfix/                       # JSON data (item maps, location maps, spoiler log)
 ├── fonts/                        # Font Awesome + Hammersmith One
 ├── dist/                         # Build output (served by GitHub Pages)
-├── .angular-cli.json             # Build config (copies assets, hotfix, fonts, scripts to dist)
+├── angular.json                  # Build config
 ├── .github/workflows/deploy.yml  # GitHub Actions: builds and deploys to Pages
 ├── 404.html                      # SPA redirect for GitHub Pages
 ├── runSite.bat                   # Windows convenience script
@@ -70,25 +56,21 @@ The app uses a **pre-2019 ALttPR seed format**. Current alttpr.com seeds won't l
    - `localStorage.getItem('seedMetadataPrefix')` → metadata prefix
    - Returns a fakeObservable that provides seedData.data = prefix + itemArray
    
-3. **Generate Seed** uses `https://api.allorigins.win/raw?url=` as a CORS proxy to call `https://alttpr.com/api/randomizer`, then follows the same save + reload flow. (Note: A dedicated OCI CORS proxy was developed but is currently bypassed due to HTTPS certificate limitations).
+3. **Generate Seed** uses `https://api.allorigins.win/raw?url=` as a CORS proxy to call `https://alttpr.com/api/randomizer`, then follows the same save + reload flow.
 
 ## Building
 ```bash
-npm install --ignore-scripts  # Skip node-sass native build
+npm install
 npm run build                 # Outputs to dist/
 ```
 
 ## GitHub Pages
 - **URL**: `https://derpaholicrex.github.io/z3rsim-reborn/`
 - **Deploy**: Automated via GitHub Actions on push to `main`
-- The workflow uses Node 18, installs with `--ignore-scripts`, builds, adds `.nojekyll`, and deploys `dist/`
-- Dynamic base href in `src/index.html` handles the subdirectory path
-- `404.html` handles SPA routing redirect
 
 ## Running Locally
 ```bash
-cd dist
-python -m http.server 8000
+npm run serve:dist
 # Open http://localhost:8000
 ```
 
@@ -99,5 +81,4 @@ python -m http.server 8000
 ## Key Caveats
 - The seed format is pre-2019 ALttPR - current seeds from alttpr.com will NOT load
 - A bundled default seed is included in hotfix/ so the app can be demonstrated
-- `ng serve` is broken on Node 12+ (pinned webpack-dev-server@2 depends on removed Node APIs)
-- The app uses `@angular/http` (deprecated, not `HttpClient`)
+- The app uses `HttpClient` (upgraded from deprecated `@angular/http`)
