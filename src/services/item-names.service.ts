@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ItemNamesService {
   itemNames: { id: number; shortName: string; longName: string }[];
   initialized: boolean;

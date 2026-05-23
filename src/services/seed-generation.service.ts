@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SeedGenerationService {
     private _proxyUrl = 'https://z3r-proxy.derpaholicrex.workers.dev';
 

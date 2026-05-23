@@ -23,7 +23,7 @@ import { LightWorldSetup } from '../dungeons/light-world.setup';
 import { DarkWorldSetup } from '../dungeons/dark-world.setup';
 import { HyruleCastleSetup } from '../dungeons/hyrule-castle.setup';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GameService {
   dungeonAbbrevs: string[];
   lwDuns: string[];

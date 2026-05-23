@@ -5,8 +5,9 @@
   "license": "ISC",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration=development",
     "build": "ng build",
+    "build:dev": "ng build --configuration=development",
     "build:prod": "ng build --prod",
     "serve:dist": "npx serve dist -l 8000",
     "preinstall": "npx npm-force-resolutions",
@@ -16,25 +17,25 @@
     "spdy": "4.0.2"
   },
   "dependencies": {
-    "@angular/animations": "~15.2.0",
-    "@angular/common": "~15.2.0",
-    "@angular/compiler": "~15.2.0",
-    "@angular/core": "~15.2.0",
-    "@angular/forms": "~15.2.0",
-    "@angular/platform-browser": "~15.2.0",
-    "@angular/platform-browser-dynamic": "~15.2.0",
-    "@angular/router": "~15.2.0",
+    "@angular/animations": "^18.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/compiler": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/platform-browser": "^18.0.0",
+    "@angular/platform-browser-dynamic": "^18.0.0",
+    "@angular/router": "^18.0.0",
     "bootstrap": "3.3.7",
     "core-js": "3.21.1",
-    "ngx-bootstrap": "5.6.2",
-    "rxjs": "7.5.0",
+    "ngx-bootstrap": "^18.0.0",
+    "rxjs": "~7.8.0",
     "rxjs-compat": "6.6.7",
-    "zone.js": "0.11.4"
+    "zone.js": "~0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~15.2.0",
-    "@angular/cli": "~15.2.0",
-    "@angular/compiler-cli": "~15.2.0",
-    "typescript": "~4.7.4"
+    "@angular-devkit/build-angular": "^18.0.0",
+    "@angular/cli": "^18.0.0",
+    "@angular/compiler-cli": "^18.0.0",
+    "typescript": "~5.4.0"
   }
 }

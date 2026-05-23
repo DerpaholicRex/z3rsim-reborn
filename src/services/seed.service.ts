@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ItemArrayService } from './item-array.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SeedService {
   _apiUrl: string;
   webVersion: string;

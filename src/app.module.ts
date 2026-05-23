@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,7 +8,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -40,6 +41,7 @@ import { SeedService } from './services/seed.service';
 import { ItemArrayService } from './services/item-array.service';
 import { ItemNamesService } from './services/item-names.service';
 import { WindowRef } from './services/window-ref.service';
+import { SeedGenerationService } from './services/seed-generation.service';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { WindowRef } from './services/window-ref.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -78,11 +81,7 @@ import { WindowRef } from './services/window-ref.service';
     TooltipModule.forRoot(),
   ],
   providers: [
-    ItemNamesService,
-    GameService,
-    SeedService,
-    ItemArrayService,
-    WindowRef,
+    SeedGenerationService,
   ],
   bootstrap: [AppComponent]
 })

@@ -16,5 +16,5 @@ import 'core-js/es/reflect';
 
 import 'core-js/proposals/reflect-metadata';
 
-import 'zone.js/dist/zone';
-import 'zone.js/dist/zone-patch-rxjs';
+import 'zone.js';
+import 'zone.js/plugins/zone-patch-rxjs';

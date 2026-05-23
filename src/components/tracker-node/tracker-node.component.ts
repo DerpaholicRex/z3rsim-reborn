@@ -83,8 +83,9 @@ export class TrackerNodeComponent implements OnInit {
         return 'url("./assets/item-icons/' + this.itemName + '.png")';
       }
     } else {
+      const numericValue = typeof this.value === 'number' ? this.value : 0;
       return (
-        'url("./assets/item-icons/' + this.itemName + (this.value > 0 ? this.value : '') + '.png")'
+        'url("./assets/item-icons/' + this.itemName + (numericValue > 0 ? numericValue : '') + '.png")'
       );
     }
   }

@@ -85,6 +85,13 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "vendorChunk": true,
+              "buildOptimizer": false
+            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -107,18 +114,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "z3rsim:build"
+            "buildTarget": "z3rsim:build"
           },
           "configurations": {
+            "development": {
+              "buildTarget": "z3rsim:build:development"
+            },
             "production": {
-              "browserTarget": "z3rsim:build:production"
+              "buildTarget": "z3rsim:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "z3rsim:build"
+            "buildTarget": "z3rsim:build"
           }
         },
         "lint": {
