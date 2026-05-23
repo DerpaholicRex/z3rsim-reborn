@@ -38,12 +38,12 @@ jobs:
         run: npm run build:prod
 
       - name: Add .nojekyll to dist
-        run: touch dist/z3rsim/browser/.nojekyll 
+        run: touch dist/browser/.nojekyll 
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/z3rsim/browser
+          path: ./dist/browser
 
       - name: Deploy to GitHub Pages
         id: deployment
