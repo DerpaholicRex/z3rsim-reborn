@@ -3,9 +3,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Items } from '../../models/items.model';
 
 @Component({
-  selector: 'app-item-line',
-  templateUrl: './item-line.component.html',
-  styleUrls: ['./item-line.component.css'],
+    selector: 'app-item-line',
+    templateUrl: './item-line.component.html',
+    styleUrls: ['./item-line.component.css'],
+    standalone: false
 })
 export class ItemLineComponent implements OnInit {
   bookLocations: string[];

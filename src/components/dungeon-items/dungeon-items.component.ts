@@ -11,9 +11,10 @@ import { DungeonNode } from '../../models/dungeon-node.model';
 import { DungeonPrize } from '../../models/dungeon-prize.enum';
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './dungeon-items.component.html',
-  styleUrls: ['./dungeon-items.component.css'],
+    selector: 'app-map',
+    templateUrl: './dungeon-items.component.html',
+    styleUrls: ['./dungeon-items.component.css'],
+    standalone: false
 })
 export class DungeonItemsComponent implements OnInit {
   isDev: boolean;

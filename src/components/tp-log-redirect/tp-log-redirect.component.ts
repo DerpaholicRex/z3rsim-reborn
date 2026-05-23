@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tp-log-redirect',
-  templateUrl: './tp-log-redirect.component.html',
-  styleUrls: ['./tp-log-redirect.component.css'],
+    selector: 'app-tp-log-redirect',
+    templateUrl: './tp-log-redirect.component.html',
+    styleUrls: ['./tp-log-redirect.component.css'],
+    standalone: false
 })
 export class TpLogRedirectComponent implements OnInit {
   constructor() {}

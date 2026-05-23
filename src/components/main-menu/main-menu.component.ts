@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.css'],
+    selector: 'app-main-menu',
+    templateUrl: './main-menu.component.html',
+    styleUrls: ['./main-menu.component.css'],
+    standalone: false
 })
 export class MainMenuComponent implements OnInit {
   generationType: string;

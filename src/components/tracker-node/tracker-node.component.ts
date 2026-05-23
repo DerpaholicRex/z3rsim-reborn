@@ -6,9 +6,10 @@ import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
 
 @Component({
-  selector: 'app-tracker-node',
-  templateUrl: './tracker-node.component.html',
-  styleUrls: ['./tracker-node.component.css'],
+    selector: 'app-tracker-node',
+    templateUrl: './tracker-node.component.html',
+    styleUrls: ['./tracker-node.component.css'],
+    standalone: false
 })
 export class TrackerNodeComponent implements OnInit {
   duns: string[];

@@ -3,9 +3,10 @@ import { DungeonPrize } from '../../models/dungeon-prize.enum';
 import { Config } from '../../models/config.model';
 
 @Component({
-  selector: 'app-dungeon-items',
-  templateUrl: './dungeon-item-count.component.html',
-  styleUrls: ['./dungeon-item-count.component.css'],
+    selector: 'app-dungeon-items',
+    templateUrl: './dungeon-item-count.component.html',
+    styleUrls: ['./dungeon-item-count.component.css'],
+    standalone: false
 })
 export class DungeonItemCountComponent implements OnInit {
   isChestCountShown: boolean;

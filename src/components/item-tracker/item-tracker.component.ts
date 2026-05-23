@@ -5,9 +5,10 @@ import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
 
 @Component({
-  selector: 'app-item-tracker',
-  templateUrl: './item-tracker.component.html',
-  styleUrls: ['./item-tracker.component.css'],
+    selector: 'app-item-tracker',
+    templateUrl: './item-tracker.component.html',
+    styleUrls: ['./item-tracker.component.css'],
+    standalone: false
 })
 export class ItemTrackerComponent implements OnInit {
   itemsToTrack: string[];

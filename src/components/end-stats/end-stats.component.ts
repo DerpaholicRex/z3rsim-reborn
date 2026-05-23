@@ -5,9 +5,10 @@ import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
 
 @Component({
-  selector: 'app-end-stats',
-  templateUrl: './end-stats.component.html',
-  styleUrls: ['./end-stats.component.css'],
+    selector: 'app-end-stats',
+    templateUrl: './end-stats.component.html',
+    styleUrls: ['./end-stats.component.css'],
+    standalone: false
 })
 export class EndStatsComponent implements OnInit {
   @Input() items: Items;

@@ -2,8 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ItemNamesService } from '../services/item-names.service';
 
 @Pipe({
-  name: 'itemLogFilter',
-  pure: false,
+    name: 'itemLogFilter',
+    pure: false,
+    standalone: false
 })
 export class ItemLogFilterPipe implements PipeTransform {
   constructor(private _itemNamesService: ItemNamesService) {}

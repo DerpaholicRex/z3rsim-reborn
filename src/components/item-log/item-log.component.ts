@@ -2,9 +2,10 @@ import { Component, OnInit, Input, IterableDiffers, IterableDiffer } from '@angu
 import { Items } from '../../models/items.model';
 
 @Component({
-  selector: 'app-item-log',
-  templateUrl: './item-log.component.html',
-  styleUrls: ['./item-log.component.css'],
+    selector: 'app-item-log',
+    templateUrl: './item-log.component.html',
+    styleUrls: ['./item-log.component.css'],
+    standalone: false
 })
 export class ItemLogComponent implements OnInit {
   filterArgs: { onlyImportantShown: boolean; searchQuery: string };

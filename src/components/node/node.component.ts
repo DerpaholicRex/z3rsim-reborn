@@ -6,9 +6,10 @@ import { Config } from '../../models/config.model';
 import { DungeonPrize } from '../../models/dungeon-prize.enum';
 
 @Component({
-  selector: 'app-node',
-  templateUrl: './node.component.html',
-  styleUrls: ['./node.component.css'],
+    selector: 'app-node',
+    templateUrl: './node.component.html',
+    styleUrls: ['./node.component.css'],
+    standalone: false
 })
 export class NodeComponent implements OnInit {
   nodeX: string;
