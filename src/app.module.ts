@@ -41,7 +41,6 @@ import { SeedService } from './services/seed.service';
 import { ItemArrayService } from './services/item-array.service';
 import { ItemNamesService } from './services/item-names.service';
 import { WindowRef } from './services/window-ref.service';
-import { SeedGenerationService } from './services/seed-generation.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -79,7 +78,6 @@ import { SeedGenerationService } from './services/seed-generation.service';
         ItemLogFilterPipe,
     ],
     providers: [
-        SeedGenerationService,
     ],
     bootstrap: [AppComponent]
 })
