@@ -79,6 +79,11 @@
     "shortName": "20rupees",
     "longName": "Twenty Rupees"
   },
+  "TwentyRupees2": {
+    "id": 17,
+    "shortName": "20rupees",
+    "longName": "Twenty Rupees"
+  },
   "Bombos": {
     "id": 100,
     "shortName": "bombos",
