@@ -89,11 +89,11 @@ div {
 }
 
 .big-key-icon {
-  background-image:url(/assets/item-icons/bigKey.png)
+  background-image:url(../../../assets/item-icons/bigKey.png)
 }
 
 .small-keys-icon {
-  background-image:url(/assets/item-icons/smallKey.png);
+  background-image:url(../../../assets/item-icons/smallKey.png);
   position:relative
 }
 
