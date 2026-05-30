@@ -136,12 +136,39 @@
     </div>
     <div class="modal-body">
       <p>
-        If you think this seed is uncompletable or has any issue, please go to our
-        <a href="https://discord.gg/nPJpFQB" target="_blank">Discord server</a> and report directly to Kyong with
-        the code below:
+        If you think this seed is uncompletable or has any issue, please describe the problem below and submit.
+        You can also copy the seed data code to report on Discord:
       </p>
-      <button class="btn btn-info" (click)="copyClipboard()">Copy to Clipboard</button>
-      <p>{{clipboardMessage}}</p>
+      <div class="form-group">
+        <label for="report-description">Describe the issue:</label>
+        <textarea id="report-description" class="form-control" rows="4"
+          placeholder="What went wrong? (e.g., this seed seems unbeatable because...)"
+          [(ngModel)]="reportDescription" maxlength="2000"></textarea>
+        <small class="text-muted">{{ reportDescription ? reportDescription.length : 0 }}/2000 characters</small>
+      </div>
+      @if (reportMessage) {
+        <div class="alert alert-success">
+          {{reportMessage}}
+        </div>
+      }
+      @if (reportError) {
+        <div class="alert alert-danger">
+          {{reportError}}
+        </div>
+      }
+      @if (clipboardMessage) {
+        <p>{{clipboardMessage}}</p>
+      }
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-info" (click)="copyClipboard()">
+        <i class="fa fa-clipboard"></i> Copy Seed Data
+      </button>
+      <button class="btn btn-primary" (click)="submitReport()" [disabled]="isSubmittingReport">
+        <i class="fa" [ngClass]="isSubmittingReport ? 'fa-spinner fa-spin' : 'fa-send'"></i>
+        {{ isSubmittingReport ? 'Submitting...' : 'Submit Report' }}
+      </button>
+      <button class="btn btn-default" (click)="closeModal()">Close</button>
     </div>
   </div>
 </ng-template>

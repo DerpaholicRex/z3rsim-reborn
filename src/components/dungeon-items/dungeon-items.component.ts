@@ -2,6 +2,7 @@ import { GameService } from '../../services/game.service';
 import { Component, OnInit, Input, Output, EventEmitter, isDevMode } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ItemNamesService } from '../../services/item-names.service';
+import { SeedReportService } from '../../services/seed-report.service';
 import { NodeStatus } from '../../models/node-status.enum';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
@@ -10,6 +11,7 @@ import { DungeonMap } from '../../models/dungeon-map.model';
 import { DungeonNode } from '../../models/dungeon-node.model';
 import { DungeonPrize } from '../../models/dungeon-prize.enum';
 import { NgStyle } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NodeComponent } from '../node/node.component';
 import { DungeonItemCountComponent } from '../dungeon-item-count/dungeon-item-count.component';
 
@@ -17,7 +19,7 @@ import { DungeonItemCountComponent } from '../dungeon-item-count/dungeon-item-co
     selector: 'app-map',
     templateUrl: './dungeon-items.component.html',
     styleUrls: ['./dungeon-items.component.css'],
-    imports: [NgStyle, NodeComponent, DungeonItemCountComponent]
+    imports: [NgStyle, NodeComponent, DungeonItemCountComponent, FormsModule]
 })
 export class DungeonItemsComponent implements OnInit {
   isDev: boolean;
@@ -52,11 +54,21 @@ export class DungeonItemsComponent implements OnInit {
   @Output() finishedDungeon = new EventEmitter<string[]>();
   @Output() onGameFinished = new EventEmitter<string>();
 
+  isSubmittingReport: boolean;
+  reportDescription: string;
+  reportMessage: string;
+  reportError: string;
+
   constructor(
     private gameService: GameService,
     private _modalService: BsModalService,
     private itemNameService: ItemNamesService,
+    private _seedReportService: SeedReportService,
   ) {
+    this.isSubmittingReport = false;
+    this.reportDescription = '';
+    this.reportMessage = '';
+    this.reportError = '';
     this.isDev = false;
     this.hasUsedMirror = false;
     this.currentRegion = 'ow';
@@ -1172,6 +1184,10 @@ export class DungeonItemsComponent implements OnInit {
   }
 
   openModal(template: any) {
+    this.reportDescription = '';
+    this.reportMessage = '';
+    this.reportError = '';
+    this.isSubmittingReport = false;
     this.modalRef = this._modalService.show(template);
   }
 
@@ -1190,6 +1206,40 @@ export class DungeonItemsComponent implements OnInit {
   closeModal() {
     this.modalRef.hide();
     this.clipboardMessage = '';
+    this.reportDescription = '';
+    this.reportMessage = '';
+    this.reportError = '';
+    this.isSubmittingReport = false;
+  }
+
+  submitReport() {
+    if (!this.reportDescription || this.reportDescription.trim().length === 0) {
+      this.reportError = 'Please enter a description of the issue.';
+      return;
+    }
+    if (this.reportDescription.length > 2000) {
+      this.reportError = 'Description is too long. Please keep it under 2000 characters.';
+      return;
+    }
+
+    this.isSubmittingReport = true;
+    this.reportMessage = '';
+    this.reportError = '';
+
+    var seedHash = this.config.data || '';
+    var seedData = this.config.data || '';
+
+    this._seedReportService.submitReport(seedHash, this.reportDescription, seedData).then(
+      (response) => {
+        this.isSubmittingReport = false;
+        this.reportMessage = response.message || 'Report submitted successfully!';
+        this.reportDescription = '';
+      },
+      (error) => {
+        this.isSubmittingReport = false;
+        this.reportError = error.message || 'Failed to submit report. Please try again later.';
+      }
+    );
   }
 
   preloadMapsAndIcons() {
