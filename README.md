@@ -16,18 +16,16 @@ This fork adds **offline/fork functionality** including:
 
 - Full TypeScript source: ~18 components, 5 services, 11 models,
   15 dungeon setups, 2 location datasets, and the `itemLogFilter` pipe
-- Builds with zero TypeScript errors against Angular 14.2.0
+- Builds with zero TypeScript errors against Angular 21.2.14
 - Behavioral parity with the original bundle
 - **The seed format is pre-2019 ALttPR.** Current seeds from
   [alttpr.com](https://alttpr.com/) will not load - a bundled default
   seed is included so you can still try it out.
-- `ng serve` is broken on modern Node versions. Use `ng build` and serve
-  the `dist/` folder with any static HTTP server.
 
 ## Requirements
 
-- **Node 16/18+**
-- A static HTTP server for viewing the build
+- **Node 20+** (Node 22 LTS recommended)
+- A static HTTP server (optional - only needed to view a production `dist/` build)
 
 ## Quick Start (Local)
 
@@ -35,13 +33,13 @@ This fork adds **offline/fork functionality** including:
 # Install dependencies
 npm install
 
-# Build to dist/
-npm run build
-
-# Serve the dist/ folder (uses local 'serve' package)
-npm run serve:dist
-# Open http://localhost:8000
+# Run the dev server (Angular CLI) - http://localhost:4200
+npm start
 ```
+
+To produce a static build instead, run `npm run build` and serve the
+generated `dist/browser/` folder with any static HTTP server
+(e.g. `npx http-server dist/browser`).
 
 ## Project Layout
 
@@ -66,7 +64,7 @@ hotfix/                   JSON data (item map, location map, spoiler log)
 fonts/                    Font Awesome + Hammersmith One
 scripts/                  Helper scripts (offline integration, item array generation)
 .angular.json             build config
-package.json              Angular 14.2.0 deps
+package.json              Angular 21.2.14 deps
 404.html                  GitHub Pages SPA redirect
 runSite.bat               Windows convenience script
 runSite.sh                Unix convenience script

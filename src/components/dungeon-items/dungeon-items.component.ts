@@ -14,14 +14,13 @@ import { NgStyle } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NodeComponent } from '../node/node.component';
 import { DungeonItemCountComponent } from '../dungeon-item-count/dungeon-item-count.component';
-import { AlertComponent } from 'ngx-bootstrap/alert';
 import { SeedService } from '../../services/seed.service';
 
 @Component({
     selector: 'app-map',
     templateUrl: './dungeon-items.component.html',
     styleUrls: ['./dungeon-items.component.css'],
-    imports: [NgStyle, NodeComponent, DungeonItemCountComponent, FormsModule, ModalModule, AlertComponent]
+    imports: [NgStyle, NodeComponent, DungeonItemCountComponent, FormsModule, ModalModule]
 })
 export class DungeonItemsComponent implements OnInit {
   @ViewChild('childModal') childModal!: ModalDirective;
