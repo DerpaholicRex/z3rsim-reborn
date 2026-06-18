@@ -47,8 +47,9 @@ generated `dist/browser/` folder with any static HTTP server
 src/
   main.ts                 bootstrap entry
   polyfills.ts            core-js + zone.js
-  index.html              app shell (jQuery + Bootstrap + Font Awesome)
+  index.html              app shell (jQuery + Bootstrap JS)
   styles.css              global styles
+  styles/                 vendored CSS (Font Awesome, Hammersmith One) + their fonts
   tsconfig.json
   app.module.ts           NgModule (18 declarations, 4 providers)
   app-routing.module.ts   routes (/, /standard, /open, /inverted, …)
@@ -61,7 +62,6 @@ src/
   pipes/                  itemLogFilter
 assets/                   PNGs (item/dungeon/map icons)
 hotfix/                   JSON data (item map, location map, spoiler log)
-fonts/                    Font Awesome + Hammersmith One
 scripts/                  Helper scripts (offline integration, item array generation)
 .angular.json             build config
 package.json              Angular 21.2.14 deps
