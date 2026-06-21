@@ -32,11 +32,6 @@
               },
               {
                 "glob": "**/*",
-                "input": "fonts",
-                "output": "/fonts"
-              },
-              {
-                "glob": "**/*",
                 "input": "scripts",
                 "output": "/scripts"
               },
@@ -47,16 +42,6 @@
               },
               {
                 "glob": "bootstrap.min.js",
-                "input": "",
-                "output": "/"
-              },
-              {
-                "glob": "font-awesome.min.css",
-                "input": "",
-                "output": "/"
-              },
-              {
-                "glob": "hammersmith-one.css",
                 "input": "",
                 "output": "/"
               },
@@ -83,6 +68,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles/hammersmith-one.css",
+              "src/styles/font-awesome.min.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -146,7 +133,6 @@
       "projectType": "application"
     }
   },
-  "defaultProject": "z3rsim",
   "schematics": {
     "@schematics/angular:component": {
       "type": "component"
