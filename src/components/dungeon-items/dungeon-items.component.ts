@@ -1,8 +1,10 @@
 import { GameService } from '../../services/game.service';
-import { Component, OnInit, Input, Output, EventEmitter, isDevMode, ViewChild } from '@angular/core';
-import { BsModalService, ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
+import { Component, ElementRef, OnDestroy, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ItemNamesService } from '../../services/item-names.service';
+import { ModalStateService } from '../../services/modal-state.service';
 import { SeedReportService } from '../../services/seed-report.service';
+import { trapFocus, restoreFocusAfterClose } from '../ui/focus-trap';
+import { isDebug } from '../../debug';
 import { NodeStatus } from '../../models/node-status.enum';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
@@ -20,12 +22,13 @@ import { SeedService } from '../../services/seed.service';
     selector: 'app-map',
     templateUrl: './dungeon-items.component.html',
     styleUrls: ['./dungeon-items.component.css'],
-    imports: [NgStyle, NodeComponent, DungeonItemCountComponent, FormsModule, ModalModule]
+    imports: [NgStyle, NodeComponent, DungeonItemCountComponent, FormsModule]
 })
-export class DungeonItemsComponent implements OnInit {
-  @ViewChild('childModal') childModal!: ModalDirective;
-  isModalOpen = false
-  isDev: boolean;
+export class DungeonItemsComponent implements OnDestroy, OnInit {
+  @ViewChild('reportDescriptionInput') reportDescriptionInput?: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('reportModal') reportModal?: ElementRef<HTMLDivElement>;
+  isModalOpen = false;
+  isDebug: boolean;
   hasUsedMirror: boolean;
   currentRegion: string;
   preloadedImages: HTMLImageElement[];
@@ -44,7 +47,6 @@ export class DungeonItemsComponent implements OnInit {
   mirrorMap: string;
   tooltip: string;
   warpButtonText: string;
-  modalRef: { hide: () => void };
 
   @Input() items: Items;
   @Input() currentMap: string;
@@ -61,11 +63,12 @@ export class DungeonItemsComponent implements OnInit {
   reportDescription: string;
   reportMessage: string;
   reportError: string;
+  private modalTrigger?: HTMLElement;
 
   constructor(
     private gameService: GameService,
-    private _modalService: BsModalService,
     private itemNameService: ItemNamesService,
+    private _modalStateService: ModalStateService,
     private _seedService: SeedService,
     
     private _seedReportService: SeedReportService,
@@ -74,7 +77,7 @@ export class DungeonItemsComponent implements OnInit {
     this.reportDescription = '';
     this.reportMessage = '';
     this.reportError = '';
-    this.isDev = false;
+    this.isDebug = false;
     this.hasUsedMirror = false;
     this.currentRegion = 'ow';
     this.preloadedImages = [];
@@ -82,7 +85,7 @@ export class DungeonItemsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isDev = isDevMode();
+    this.isDebug = isDebug();
     if (this.config.isFullMap) {
       var mapResult = this.gameService.getMap(this.currentMap);
       this.currentDungeonMap = mapResult[0];
@@ -101,6 +104,10 @@ export class DungeonItemsComponent implements OnInit {
     this.clearTooltip();
     this.clipboardMessage = '';
     this.preloadMapsAndIcons();
+  }
+
+  ngOnDestroy() {
+    this._modalStateService.setReportModalOpen(false);
   }
 
   ngOnChanges() {
@@ -1167,7 +1174,7 @@ export class DungeonItemsComponent implements OnInit {
   }
 
   onMapClicked(event: MouseEvent) {
-    if (this.isDev) {
+    if (this.isDebug) {
       console.log((event.offsetX / 555) * 100, (event.offsetY / 555) * 100);
     }
   }
@@ -1193,14 +1200,10 @@ export class DungeonItemsComponent implements OnInit {
     this.reportMessage = '';
     this.reportError = '';
     this.isSubmittingReport = false;
-    // this.modalRef = this._modalService.show(template);
-    if (this.childModal) {
-      this.childModal.show();
-      this.isModalOpen = true
-      console.log('show() was called on the directive.');
-    } else {
-      console.error('Error: childModal reference is undefined!');
-    }
+    this.modalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : undefined;
+    this.isModalOpen = true;
+    this._modalStateService.setReportModalOpen(true);
+    setTimeout(() => this.reportDescriptionInput?.nativeElement.focus());
   }
 
   copyClipboard() {
@@ -1216,13 +1219,24 @@ export class DungeonItemsComponent implements OnInit {
   }
 
   closeModal() {
-    this.childModal.hide();
     this.isModalOpen = false;
     this.clipboardMessage = '';
     this.reportDescription = '';
     this.reportMessage = '';
     this.reportError = '';
     this.isSubmittingReport = false;
+    this._modalStateService.setReportModalOpen(false);
+    restoreFocusAfterClose(this.modalTrigger);
+    this.modalTrigger = undefined;
+  }
+
+  onReportModalKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeModal();
+      return;
+    }
+    trapFocus(event, this.reportModal?.nativeElement);
   }
 
   submitReport() {

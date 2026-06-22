@@ -1,3 +1,4 @@
+<div [attr.inert]="isModalOpen ? '' : null" [attr.aria-hidden]="isModalOpen ? 'true' : null">
 <div class="map" [ngStyle]="{'background-image': getMapBg()}" (click)="onMapClicked($event)">
   @if (!currentDungeon) {
     <div>
@@ -126,28 +127,45 @@
   </button>
 </div>
 
-<div bsModal #childModal="bs-modal" 
-     class="modal fade" 
+@if (isDebug) {
+  <div class="debug-tools map-debug-tools" aria-label="Debug tools">
+    <button class="btn btn-warning debug-button" type="button" (click)="getAll()">
+      Get All
+    </button>
+    <button class="btn btn-warning debug-button" type="button" (click)="getBootsDw()">
+      Get Some
+    </button>
+  </div>
+}
+</div>
+
+<div #reportModal
+     class="modal"
      [style.display]="isModalOpen ? 'block' : 'none'"
      [class.show]="isModalOpen"
      [style.opacity]="isModalOpen ? '1' : '0'"
-     tabindex="-1" role="dialog" aria-hidden="true">
+     [attr.aria-hidden]="!isModalOpen"
+     [attr.aria-modal]="isModalOpen ? 'true' : null"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="report-seed-title"
+     (keydown)="onReportModalKeydown($event)">
   
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Report this Seed</h4>
+        <h4 class="modal-title pull-left" id="report-seed-title">Report this Seed</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <p>
-          If you think this seed is incomplete-able, please describe the problem below and submit.
+          If you think this seed is impossible to complete, please describe the problem below and submit.
         </p>
         <div class="form-group">
           <label for="report-description">Describe the issue:</label>
-          <textarea id="report-description" class="form-control" rows="4" [(ngModel)]="reportDescription" maxlength="2000"></textarea>
+          <textarea #reportDescriptionInput id="report-description" class="form-control" rows="4" [(ngModel)]="reportDescription" maxlength="2000"></textarea>
         </div>
       @if (reportMessage) {
         <div class="alert alert-success">
@@ -164,20 +182,11 @@
       }
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" (click)="submitReport(); closeModal()" [disabled]="isSubmittingReport">
+        <button class="btn btn-primary" type="button" (click)="submitReport()" [disabled]="isSubmittingReport">
           Submit Report
         </button>
-        <button class="btn btn-default" (click)="closeModal()">Close</button>
+        <button class="btn btn-default" type="button" (click)="closeModal()">Close</button>
       </div>
     </div>
   </div>
 </div>
-
-@if (isDev) {
-  <div>
-    <br>
-      <br>
-        <button (click)="getAll()">get All</button>
-        <button (click)="getBootsDw()">get Some</button>
-      </div>
-    }

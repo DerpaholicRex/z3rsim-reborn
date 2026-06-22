@@ -1,9 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, Input, Output, EventEmitter, isDevMode } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { GameService } from '../../services/game.service';
+import { ModalStateService } from '../../services/modal-state.service';
 import { SeedService } from '../../services/seed.service';
 import { ItemNamesService } from '../../services/item-names.service';
+import { isDebug } from '../../debug';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
@@ -21,9 +24,10 @@ import { EndStatsComponent } from '../end-stats/end-stats.component';
     styleUrls: ['./game.component.css'],
     imports: [ItemTrackerComponent, DungeonItemsComponent, ItemLogComponent, OptionsComponent, GameMenuComponent, EndStatsComponent]
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnDestroy, OnInit {
   modeSelected: string;
-  isDev: boolean;
+  isDebug: boolean;
+  isReportModalOpen: boolean;
   seedDescription: string;
   seedNum: string;
   errorMessage: string;
@@ -38,17 +42,20 @@ export class GameComponent implements OnInit {
   dungeonsData: Dungeon[];
   preloadedImages: HTMLImageElement[];
   preloadedMaps: HTMLImageElement[];
+  private reportModalOpenSubscription?: Subscription;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private gameService: GameService,
+    private _modalStateService: ModalStateService,
     private _seedService: SeedService,
     private _itemNamesService: ItemNamesService,
     private _location: Location,
   ) {
     this.modeSelected = 'standard';
-    this.isDev = false;
+    this.isDebug = false;
+    this.isReportModalOpen = false;
     this.seedDescription = '';
     this.seedNum = '';
     this.errorMessage = '';
@@ -57,7 +64,10 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isDev = isDevMode();
+    this.isDebug = isDebug();
+    this.reportModalOpenSubscription = this._modalStateService.reportModalOpen$.subscribe((isOpen) => {
+      this.isReportModalOpen = isOpen;
+    });
     this.gameState = 'loading';
     this._seedService.ping();
     if (this._router.url.indexOf('open') > -1) {
@@ -130,6 +140,11 @@ export class GameComponent implements OnInit {
           });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.reportModalOpenSubscription?.unsubscribe();
+    this._modalStateService.setReportModalOpen(false);
   }
 
   onCreditWarp() {

@@ -1,17 +1,15 @@
 import { SeedService } from '../../services/seed.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ButtonRadioDirective } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
 import { NgStyle, NgClass } from '@angular/common';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
-import { AlertComponent } from 'ngx-bootstrap/alert';
+import { HelpPopoverComponent } from '../help-popover/help-popover.component';
 
 @Component({
     selector: 'app-main-menu',
     templateUrl: './main-menu.component.html',
     styleUrls: ['./main-menu.component.css'],
-    imports: [ButtonRadioDirective, FormsModule, PopoverDirective, NgStyle, NgClass, AlertComponent]
+    imports: [FormsModule, NgStyle, NgClass, HelpPopoverComponent]
 })
 export class MainMenuComponent implements OnInit {
   generationType: string;
@@ -515,7 +513,6 @@ export class MainMenuComponent implements OnInit {
     var closeBtn = document.createElement('button');
     closeBtn.setAttribute('type', 'button');
     closeBtn.className = 'close';
-    closeBtn.setAttribute('data-dismiss', 'alert');
     closeBtn.setAttribute('aria-label', 'Close');
     closeBtn.innerHTML = '<span aria-hidden="true">&times;</span>';
     closeBtn.onclick = function() { notification.remove(); };

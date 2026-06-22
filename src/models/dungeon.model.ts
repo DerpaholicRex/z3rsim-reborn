@@ -65,6 +65,7 @@ export class Dungeon {
     'Turtle Rock',
   ];
   static lwDungeons = ['Eastern Palace', 'Desert Palace', 'Tower of Hera'];
+  // Maps in this list must have a matching `-flipped` background asset.
   static pegMaps = [
     'ip-bj',
     'ip-fairy-drop',

@@ -1,4 +1,8 @@
-<h1 class="title"><small class="hidden-xs">{{ seedDescription }}</small></h1>
+<h1 class="title"
+  [attr.inert]="isReportModalOpen ? '' : null"
+  [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
+  <small class="hidden-xs">{{ seedDescription }}</small>
+</h1>
 @if (gameState === 'loading') {
   <div class="container">
     Loading...
@@ -9,7 +13,9 @@
     <app-item-tracker class="col-md-3 col-sm-4 col-xs-3 game-obj"
       [items]="items"
       [config]="config"
-      [dungeonsData]="dungeonsData">
+      [dungeonsData]="dungeonsData"
+      [attr.inert]="isReportModalOpen ? '' : null"
+      [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     </app-item-tracker>
     <app-map class="col-md-6 col-sm-8 col-xs-9 game-obj"
       [items]="items"
@@ -24,12 +30,19 @@
     </app-map>
     <app-item-log class="col-md-3 col-xs-12 game-obj"
       [itemLogList]="itemLog"
-      [items]="items">
+      [items]="items"
+      [attr.inert]="isReportModalOpen ? '' : null"
+      [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     </app-item-log>
-    <app-options></app-options>
+    <app-options
+      [attr.inert]="isReportModalOpen ? '' : null"
+      [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
+    </app-options>
     <app-game-menu class="col-sm-6 game-obj"
       [items]="items"
-      [currentMap]="currentMap">
+      [currentMap]="currentMap"
+      [attr.inert]="isReportModalOpen ? '' : null"
+      [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     </app-game-menu>
   </div>
 }
@@ -41,7 +54,7 @@
         [config]="config">
       </app-end-stats>
     </div>
-    <div>
+    <div class="finished-actions">
       <button class="btn btn-primary" type="button" (click)="onBackMainMenu()">
       Return to Main Menu</button>
       <button class="btn btn-primary" type="button" (click)="onContinuePlaying()">
@@ -50,6 +63,12 @@
   </div>
 }
 
-@if (isDev) {
-  <button (click)="onCreditWarp()">Credits Warp</button>
+@if (isDebug) {
+  <div class="debug-tools" aria-label="Debug tools"
+    [attr.inert]="isReportModalOpen ? '' : null"
+    [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
+    <button class="btn btn-warning debug-button" type="button" (click)="onCreditWarp()">
+      Credits Warp
+    </button>
+  </div>
 }

@@ -1,11 +1,13 @@
 <div class="panel panel-info">
   <div class="panel-heading">
-    <button btnCheckbox
+    <button
       class="btn btn-default"
+      [class.active]="filterArgs.onlyImportantShown"
+      [attr.aria-pressed]="filterArgs.onlyImportantShown"
       name="showImportantButton"
-      tooltip="Show Only Important Items"
+      title="Show Only Important Items"
       type="button"
-      [(ngModel)]="filterArgs.onlyImportantShown">
+      (click)="onToggleImportant()">
       <i aria-hidden="true" class="fa fa-filter"></i>
       <span class="visible-xs-inline visible-sm-inline"> Filter Trash Items</span>
     </button>

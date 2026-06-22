@@ -1,154 +1,168 @@
 <div class="btn-group btn-group-justified mode-select-radio" role="group">
-  <label btnRadio="open" class="btn btn-default" name="open-gen-button"
-  [(ngModel)]="generationType">Open Mode</label>
-  <label btnRadio="custom" class="btn btn-default" name="custom-gen-button"
-  [(ngModel)]="generationType">Custom Generation</label>
-  <label btnRadio="mystery" class="btn btn-default" name="custom-gen-button"
-  [(ngModel)]="generationType">Mystery Seed</label>
+  <button type="button" class="btn btn-default" name="open-gen-button"
+    [class.active]="generationType === 'open'"
+    [attr.aria-pressed]="generationType === 'open'"
+    (click)="generationType = 'open'">Open Mode</button>
+  <button type="button" class="btn btn-default" name="custom-gen-button"
+    [class.active]="generationType === 'custom'"
+    [attr.aria-pressed]="generationType === 'custom'"
+    (click)="generationType = 'custom'">Custom Generation</button>
+  <button type="button" class="btn btn-default" name="mystery-gen-button"
+    [class.active]="generationType === 'mystery'"
+    [attr.aria-pressed]="generationType === 'mystery'"
+    (click)="generationType = 'mystery'">Mystery Seed</button>
 </div>
 
 @if (generationType == 'open') {
   <form class="form-horizontal" novalidate>
-    <div class="form-group" style="margin-top: 15px;">
-      <label class="col-sm-4 control-label" for="placement-mode">Item Placement
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Advanced
-        <span class="question-mark" container="body"
-              popover="Some dark rooms with firerod are in logic, Skull Woods pinball chest may have an item,
-        TR laser bridge doesn't require an invulnerability item, etc">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Dungeons Items
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Standard
-        <span class="question-mark" container="body"
-          popover="All keys and dungeon items are inside their own dungeons">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Accessibility
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">100% Inventory
-        <span class="question-mark" container="body"
-          popover="All bosses and inventory items are accessible. Not all keys may be reachable">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Goal
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Defeat Ganon
-        <span class="question-mark" container="body"
-          popover="You must defeat Agahnim 2 and collect the required crystal amount to be able to beat Ganon">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Open Tower
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">7 Crystals
-        <span class="question-mark" container="body"
-          popover="7 Crystals are required to be able to enter Ganons Tower">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Ganon Vulnerable
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">7 Crystals
-        <span class="question-mark" container="body"
-          popover="7 Crystals are required to be able to damage Ganon">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">World State
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Open
-        <span class="question-mark" container="body"
-          popover="Game starts with the escape prologue done and you may use Link's House or the Sanctuary as spawn points">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Hints
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Off
-        <span class="question-mark" container="body"
-          popover="All hint tiles are disabled">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Swords
-      </label>
-      <p class="col-sm-4 seed-type-descriptor">Randomized
-        <span class="question-mark" container="body"
-          popover="You start without a sword, all 4 swords are shuffled in the world">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </p>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="map-mode">Overworld
-        <span class="question-mark" container="body"
-          popover="Do you want to travel the overworld screen by screen?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
-      <div class="col-sm-8" id="map-mode">
-        <label btnRadio="no" class="btn btn-default" name="simple-map-button"
-        [(ngModel)]="mapSelected">Simple</label>
-        <label btnRadio="yes" class="btn btn-default" name="full-map-button"
-          [ngStyle]="{'display': isAdvancedOWEnabled}"
-        [(ngModel)]="mapSelected">Advanced</label>
+    <div class="open-mode-summary">
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Item Placement
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Advanced
+          <app-help-popover
+            label="Item Placement help"
+            text="Some dark rooms with firerod are in logic, Skull Woods pinball chest may have an item, TR laser bridge doesn't require an invulnerability item, etc">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Dungeons Items
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Standard
+          <app-help-popover
+            label="Dungeon Items help"
+            text="All keys and dungeon items are inside their own dungeons">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Accessibility
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">100% Inventory
+          <app-help-popover
+            label="Accessibility help"
+            text="All bosses and inventory items are accessible. Not all keys may be reachable">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Goal
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Defeat Ganon
+          <app-help-popover
+            label="Goal help"
+            text="You must defeat Agahnim 2 and collect the required crystal amount to be able to beat Ganon">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Open Tower
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">7 Crystals
+          <app-help-popover
+            label="Open Tower help"
+            text="7 Crystals are required to be able to enter Ganons Tower">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Ganon Vulnerable
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">7 Crystals
+          <app-help-popover
+            label="Ganon Vulnerable help"
+            text="7 Crystals are required to be able to damage Ganon">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">World State
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Open
+          <app-help-popover
+            label="World State help"
+            text="Game starts with the escape prologue done and you may use Link's House or the Sanctuary as spawn points">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Hints
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Off
+          <app-help-popover
+            label="Hints help"
+            text="All hint tiles are disabled">
+          </app-help-popover>
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="placement-mode">Swords
+        </label>
+        <p class="col-sm-4 seed-type-descriptor">Randomized
+          <app-help-popover
+            label="Swords help"
+            text="You start without a sword, all 4 swords are shuffled in the world">
+          </app-help-popover>
+        </p>
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-sm-4 control-label" for="seed-num-input">Seed</label>
-      <div class="col-sm-8 form-inline">
-        <input class="form-control" id="seed-num-input" maxlength="20"
-          name="seedSelect" placeholder="Random" type="text"
-          [(ngModel)]="seedNum" [disabled]="dailySeed"
-          (keyup.enter)="onSubmit()">
+    <div class="open-mode-controls">
+      <div class="form-group">
+        <div class="col-sm-4 label-with-help">
+          <label class="control-label" for="map-mode">Overworld</label>
+          <app-help-popover
+            label="Overworld help"
+            text="Do you want to travel the overworld screen by screen?">
+          </app-help-popover>
+        </div>
+        <div class="col-sm-8" id="map-mode">
+          <button type="button" class="btn btn-default" name="simple-map-button"
+            [class.active]="mapSelected === 'no'"
+            [attr.aria-pressed]="mapSelected === 'no'"
+            (click)="mapSelected = 'no'">Simple</button>
+          <button type="button" class="btn btn-default" name="full-map-button"
+            [ngStyle]="{'display': isAdvancedOWEnabled}"
+            [class.active]="mapSelected === 'yes'"
+            [attr.aria-pressed]="mapSelected === 'yes'"
+            (click)="mapSelected = 'yes'">Advanced</button>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-4 col-sm-8">
-        <button class="btn btn-success" type="button" style="margin-right: 10px;"
-          [disabled]="isGenerating"
-          (click)="onGenerateNewSeed()">
-          <i class="fa" [ngClass]="isGenerating ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
-          {{ isGenerating ? 'Generating...' : 'Generate Seed' }}
-        </button>
-        <button class="btn btn-default" type="button" style="margin-right: 10px;" (click)="fileInput.click()">
-          <i class="fa fa-upload"></i> Load Spoiler Log
-        </button>
-        <input #fileInput type="file" accept=".json,.txt" style="display:none"
-          (change)="onSpoilerLogFileSelected($event)">
-        <button class="btn btn-primary" type="button"
-          [disabled]="shouldDisablePlay"
-        (click)="onSubmit()">Play</button>
-        @if (seedInfo) {
-          <span style="margin-left: 10px;">{{seedInfo}}</span>
-        }
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="seed-num-input">Seed</label>
+        <div class="col-sm-8 form-inline">
+          <input class="form-control" id="seed-num-input" maxlength="20"
+            name="seedSelect" placeholder="Random" type="text"
+            [(ngModel)]="seedNum" [disabled]="dailySeed"
+            (keyup.enter)="onSubmit()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <button class="btn btn-success" type="button"
+            [disabled]="isGenerating"
+            (click)="onGenerateNewSeed()">
+            <i class="fa" [ngClass]="isGenerating ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
+            {{ isGenerating ? 'Generating...' : 'Generate Seed' }}
+          </button>
+          <button class="btn btn-default" type="button" (click)="fileInput.click()">
+            <i class="fa fa-upload"></i> Load Spoiler Log
+          </button>
+          <input #fileInput type="file" accept=".json,.txt" style="display:none"
+            (change)="onSpoilerLogFileSelected($event)">
+          <button class="btn btn-primary" type="button"
+            [disabled]="shouldDisablePlay"
+          (click)="onSubmit()">Play</button>
+          @if (seedInfo) {
+            <span style="margin-left: 10px;">{{seedInfo}}</span>
+          }
+        </div>
       </div>
     </div>
     @if (errorMessage) {
-      <alert type="danger">
+      <div class="alert alert-danger" role="alert">
         {{errorMessage}}
-      </alert>
+      </div>
     }
   </form>
 }
@@ -156,80 +170,113 @@
 @if (generationType === 'custom') {
   <form class="form-horizontal" novalidate>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="placement-mode">Item Placement
-        <span class="question-mark" container="body"
-          popover="Changes logical restrictions for a more casual or advanced experience">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="placement-mode">Item Placement</label>
+        <app-help-popover
+          label="Item Placement help"
+          text="Changes logical restrictions for a more casual or advanced experience">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="placement-mode">
-        <label btnRadio="basic" class="btn btn-default" name="basic-place-button"
-        [(ngModel)]="itemPlacementSelected">Basic</label>
-        <label btnRadio="advanced" class="btn btn-default" name="advanced-place-button"
-        [(ngModel)]="itemPlacementSelected">Advanced</label>
+        <button type="button" class="btn btn-default" name="basic-place-button"
+          [class.active]="itemPlacementSelected === 'basic'"
+          [attr.aria-pressed]="itemPlacementSelected === 'basic'"
+          (click)="itemPlacementSelected = 'basic'">Basic</button>
+        <button type="button" class="btn btn-default" name="advanced-place-button"
+          [class.active]="itemPlacementSelected === 'advanced'"
+          [attr.aria-pressed]="itemPlacementSelected === 'advanced'"
+          (click)="itemPlacementSelected = 'advanced'">Advanced</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="var-mode">Dungeon Items
-        <span class="question-mark" container="body"
-          popover="Which dungeon items get shuffled into the rest of the world?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="var-mode">Dungeon Items</label>
+        <app-help-popover
+          label="Dungeon Items help"
+          text="Which dungeon items get shuffled into the rest of the world?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="var-mode">
-        <label btnRadio="standard" class="btn btn-default" name="no-di-button"
-        [(ngModel)]="dungeonItemsSelected">Standard</label>
-        <label btnRadio="mc" class="btn btn-default" name="mc-button"
-        [(ngModel)]="dungeonItemsSelected">Maps/Compasses</label>
-        <label btnRadio="mcs" class="btn btn-default" name="mcs-button"
-        [(ngModel)]="dungeonItemsSelected">Maps/Compasses/Small Keys</label>
-        <label btnRadio="full" class="btn btn-default" name="keysanity-button"
-        [(ngModel)]="dungeonItemsSelected">Keysanity</label>
+        <button type="button" class="btn btn-default" name="no-di-button"
+          [class.active]="dungeonItemsSelected === 'standard'"
+          [attr.aria-pressed]="dungeonItemsSelected === 'standard'"
+          (click)="dungeonItemsSelected = 'standard'">Standard</button>
+        <button type="button" class="btn btn-default" name="mc-button"
+          [class.active]="dungeonItemsSelected === 'mc'"
+          [attr.aria-pressed]="dungeonItemsSelected === 'mc'"
+          (click)="dungeonItemsSelected = 'mc'">Maps/Compasses</button>
+        <button type="button" class="btn btn-default" name="mcs-button"
+          [class.active]="dungeonItemsSelected === 'mcs'"
+          [attr.aria-pressed]="dungeonItemsSelected === 'mcs'"
+          (click)="dungeonItemsSelected = 'mcs'">Maps/Compasses/Small Keys</button>
+        <button type="button" class="btn btn-default" name="keysanity-button"
+          [class.active]="dungeonItemsSelected === 'full'"
+          [attr.aria-pressed]="dungeonItemsSelected === 'full'"
+          (click)="dungeonItemsSelected = 'full'">Keysanity</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="access-mode">Accessibility
-        <span class="question-mark" container="body"
-          popover="Is every chest accessible?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="access-mode">Accessibility</label>
+        <app-help-popover
+          label="Accessibility help"
+          text="Is every chest accessible?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="access-mode">
-        <label btnRadio="items" class="btn btn-default" name="full-inv-button"
-        [(ngModel)]="accessibilitySelected">100% Inventory</label>
-        <label btnRadio="locations" class="btn btn-default" name="full-loc-button"
-        [(ngModel)]="accessibilitySelected">100% Locations</label>
-        <label btnRadio="none" class="btn btn-default" name="beatable-button"
-        [(ngModel)]="accessibilitySelected">Beatable Only</label>
+        <button type="button" class="btn btn-default" name="full-inv-button"
+          [class.active]="accessibilitySelected === 'items'"
+          [attr.aria-pressed]="accessibilitySelected === 'items'"
+          (click)="accessibilitySelected = 'items'">100% Inventory</button>
+        <button type="button" class="btn btn-default" name="full-loc-button"
+          [class.active]="accessibilitySelected === 'locations'"
+          [attr.aria-pressed]="accessibilitySelected === 'locations'"
+          (click)="accessibilitySelected = 'locations'">100% Locations</button>
+        <button type="button" class="btn btn-default" name="beatable-button"
+          [class.active]="accessibilitySelected === 'none'"
+          [attr.aria-pressed]="accessibilitySelected === 'none'"
+          (click)="accessibilitySelected = 'none'">Beatable Only</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="goal-mode">Goal
-        <span class="question-mark" container="body"
-          popover="Fast Ganon means you don't need to beat Agahnim 2 to fight Ganon">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="goal-mode">Goal</label>
+        <app-help-popover
+          label="Goal help"
+          text="Fast Ganon means you don't need to beat Agahnim 2 to fight Ganon">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="goal-mode">
-        <label btnRadio="ganon" class="btn btn-default" name="ganon-button"
-        [(ngModel)]="goalSelected">Defeat Ganon</label>
-        <label btnRadio="fast_ganon" class="btn btn-default" name="fast-ganon-button"
-        [(ngModel)]="goalSelected">Fast Ganon</label>
-        <label btnRadio="dungeons" class="btn btn-default" name="alldungeons-button"
-        [(ngModel)]="goalSelected">All Dungeons</label>
-        <label btnRadio="pedestal" class="btn btn-default" name="pedestal-button"
-        [(ngModel)]="goalSelected">Master Sword Pedestal</label>
-        <label btnRadio="triforce-hunt" class="btn btn-default" name="triforce-button"
-        [(ngModel)]="goalSelected">Triforce Hunt</label>
+        <button type="button" class="btn btn-default" name="ganon-button"
+          [class.active]="goalSelected === 'ganon'"
+          [attr.aria-pressed]="goalSelected === 'ganon'"
+          (click)="goalSelected = 'ganon'">Defeat Ganon</button>
+        <button type="button" class="btn btn-default" name="fast-ganon-button"
+          [class.active]="goalSelected === 'fast_ganon'"
+          [attr.aria-pressed]="goalSelected === 'fast_ganon'"
+          (click)="goalSelected = 'fast_ganon'">Fast Ganon</button>
+        <button type="button" class="btn btn-default" name="alldungeons-button"
+          [class.active]="goalSelected === 'dungeons'"
+          [attr.aria-pressed]="goalSelected === 'dungeons'"
+          (click)="goalSelected = 'dungeons'">All Dungeons</button>
+        <button type="button" class="btn btn-default" name="pedestal-button"
+          [class.active]="goalSelected === 'pedestal'"
+          [attr.aria-pressed]="goalSelected === 'pedestal'"
+          (click)="goalSelected = 'pedestal'">Master Sword Pedestal</button>
+        <button type="button" class="btn btn-default" name="triforce-button"
+          [class.active]="goalSelected === 'triforce-hunt'"
+          [attr.aria-pressed]="goalSelected === 'triforce-hunt'"
+          (click)="goalSelected = 'triforce-hunt'">Triforce Hunt</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="open-tower-mode">Open Tower
-        <span class="question-mark" container="body"
-          popover="How many crystals do you need to open Ganon's Tower?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="open-tower-mode">Open Tower</label>
+        <app-help-popover
+          label="Open Tower help"
+          text="How many crystals do you need to open Ganon's Tower?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="game-mode">
         <select class="form-control" id="open-tower-mode" name="tower-select"
           [(ngModel)]="openTowerSelected">
@@ -240,12 +287,13 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="open-ganon-mode">Ganon Vulnerable
-        <span class="question-mark" container="body"
-          popover="How many crystals do you need to damage Ganon?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="open-ganon-mode">Ganon Vulnerable</label>
+        <app-help-popover
+          label="Ganon Vulnerable help"
+          text="How many crystals do you need to damage Ganon?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="game-mode">
         <select class="form-control" id="open-ganon-mode" name="ganon-select"
           [(ngModel)]="openGanonSelected">
@@ -256,93 +304,126 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="game-mode">World State
-        <span class="question-mark" container="body"
-          popover="Do we rescue Zelda? Do we start in the Light World?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="game-mode">World State</label>
+        <app-help-popover
+          label="World State help"
+          text="Do we rescue Zelda? Do we start in the Light World?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="game-mode">
-        <label btnRadio="standard" class="btn btn-default" name="standard-button"
-        [(ngModel)]="modeSelected" (click)="onIsInverted(false)">Standard</label>
-        <label btnRadio="open" class="btn btn-default" name="open-button"
-        [(ngModel)]="modeSelected" (click)="onIsInverted(false)">Open</label>
-        <label btnRadio="inverted" class="btn btn-default" name="inverted-button"
-        [(ngModel)]="modeSelected" (click)="onIsInverted(true)">Inverted</label>
+        <button type="button" class="btn btn-default" name="standard-button"
+          [class.active]="modeSelected === 'standard'"
+          [attr.aria-pressed]="modeSelected === 'standard'"
+          (click)="modeSelected = 'standard'; onIsInverted(false)">Standard</button>
+        <button type="button" class="btn btn-default" name="open-button"
+          [class.active]="modeSelected === 'open'"
+          [attr.aria-pressed]="modeSelected === 'open'"
+          (click)="modeSelected = 'open'; onIsInverted(false)">Open</button>
+        <button type="button" class="btn btn-default" name="inverted-button"
+          [class.active]="modeSelected === 'inverted'"
+          [attr.aria-pressed]="modeSelected === 'inverted'"
+          (click)="modeSelected = 'inverted'; onIsInverted(true)">Inverted</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="enemy-mode">Boss Shuffle
-        <span class="question-mark" container="body"
-          popover="Shuffle bosses? Allow repeat bosses?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="enemy-mode">Boss Shuffle</label>
+        <app-help-popover
+          label="Boss Shuffle help"
+          text="Shuffle bosses? Allow repeat bosses?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="enemy-mode">
-        <label btnRadio="none" class="btn btn-default" name="no-enemy-button"
-        [(ngModel)]="enemizerSelected">None</label>
-        <label btnRadio="simple" class="btn btn-default" name="simple-button"
-        [(ngModel)]="enemizerSelected">Simple</label>
-        <label btnRadio="full" class="btn btn-default" name="full-button"
-        [(ngModel)]="enemizerSelected">Full</label>
-        <label btnRadio="random" class="btn btn-default" name="chaos-button"
-        [(ngModel)]="enemizerSelected">Random</label>
+        <button type="button" class="btn btn-default" name="no-enemy-button"
+          [class.active]="enemizerSelected === 'none'"
+          [attr.aria-pressed]="enemizerSelected === 'none'"
+          (click)="enemizerSelected = 'none'">None</button>
+        <button type="button" class="btn btn-default" name="simple-button"
+          [class.active]="enemizerSelected === 'simple'"
+          [attr.aria-pressed]="enemizerSelected === 'simple'"
+          (click)="enemizerSelected = 'simple'">Simple</button>
+        <button type="button" class="btn btn-default" name="full-button"
+          [class.active]="enemizerSelected === 'full'"
+          [attr.aria-pressed]="enemizerSelected === 'full'"
+          (click)="enemizerSelected = 'full'">Full</button>
+        <button type="button" class="btn btn-default" name="chaos-button"
+          [class.active]="enemizerSelected === 'random'"
+          [attr.aria-pressed]="enemizerSelected === 'random'"
+          (click)="enemizerSelected = 'random'">Random</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="hints-mode">Hints
-        <span class="question-mark" container="body"
-          popover="Enable hint tiles?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="hints-mode">Hints</label>
+        <app-help-popover
+          label="Hints help"
+          text="Enable hint tiles?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="hints-mode">
-        <label btnRadio="on" class="btn btn-default" name="with-hints-button"
-        [(ngModel)]="hintsSelected">On</label>
-        <label btnRadio="off" class="btn btn-default" name="no-hints-button"
-        [(ngModel)]="hintsSelected">Off</label>
+        <button type="button" class="btn btn-default" name="with-hints-button"
+          [class.active]="hintsSelected === 'on'"
+          [attr.aria-pressed]="hintsSelected === 'on'"
+          (click)="hintsSelected = 'on'">On</button>
+        <button type="button" class="btn btn-default" name="no-hints-button"
+          [class.active]="hintsSelected === 'off'"
+          [attr.aria-pressed]="hintsSelected === 'off'"
+          (click)="hintsSelected = 'off'">Off</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="swords-mode">Swords
-        <span class="question-mark" container="body"
-          popover="Do we start with a sword? Can we get swords at all?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="swords-mode">Swords</label>
+        <app-help-popover
+          label="Swords help"
+          text="Do we start with a sword? Can we get swords at all?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="swords-mode">
-        <label btnRadio="randomized" class="btn btn-default" name="randomized-button"
-        [(ngModel)]="swordsSelected">Randomized</label>
-        <label btnRadio="assured" class="btn btn-default" name="assured-button"
-        [(ngModel)]="swordsSelected">Assured</label>
-        <label btnRadio="swordless" class="btn btn-default" name="swordless-button"
-        [(ngModel)]="swordsSelected">Swordless</label>
+        <button type="button" class="btn btn-default" name="randomized-button"
+          [class.active]="swordsSelected === 'randomized'"
+          [attr.aria-pressed]="swordsSelected === 'randomized'"
+          (click)="swordsSelected = 'randomized'">Randomized</button>
+        <button type="button" class="btn btn-default" name="assured-button"
+          [class.active]="swordsSelected === 'assured'"
+          [attr.aria-pressed]="swordsSelected === 'assured'"
+          (click)="swordsSelected = 'assured'">Assured</button>
+        <button type="button" class="btn btn-default" name="swordless-button"
+          [class.active]="swordsSelected === 'swordless'"
+          [attr.aria-pressed]="swordsSelected === 'swordless'"
+          (click)="swordsSelected = 'swordless'">Swordless</button>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="map-mode">Overworld
-        <span class="question-mark" container="body"
-          popover="Do you want to travel the overworld screen by screen?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="map-mode">Overworld</label>
+        <app-help-popover
+          label="Overworld help"
+          text="Do you want to travel the overworld screen by screen?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="map-mode">
-        <label btnRadio="no" class="btn btn-default" name="simple-map-button"
-        [(ngModel)]="mapSelected">Simple</label>
-        <label btnRadio="yes" class="btn btn-default" name="full-map-button"
+        <button type="button" class="btn btn-default" name="simple-map-button"
+          [class.active]="mapSelected === 'no'"
+          [attr.aria-pressed]="mapSelected === 'no'"
+          (click)="mapSelected = 'no'">Simple</button>
+        <button type="button" class="btn btn-default" name="full-map-button"
           [ngStyle]="{'display': isAdvancedOWEnabled}"
-        [(ngModel)]="mapSelected">Advanced</label>
+          [class.active]="mapSelected === 'yes'"
+          [attr.aria-pressed]="mapSelected === 'yes'"
+          (click)="mapSelected = 'yes'">Advanced</button>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-8">
-        <button class="btn btn-success" type="button" style="margin-right: 10px;"
+        <button class="btn btn-success" type="button"
           [disabled]="isGenerating"
           (click)="onGenerateNewSeed()">
           <i class="fa" [ngClass]="isGenerating ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
           {{ isGenerating ? 'Generating...' : 'Generate Seed' }}
         </button>
-        <button class="btn btn-default" type="button" style="margin-right: 10px;" (click)="fileInput.click()">
+        <button class="btn btn-default" type="button" (click)="fileInput.click()">
           <i class="fa fa-upload"></i> Load Spoiler Log
         </button>
         <input #fileInput type="file" accept=".json,.txt" style="display:none"
@@ -356,9 +437,9 @@
       </div>
     </div>
     @if (errorMessage) {
-      <alert type="danger">
+      <div class="alert alert-danger" role="alert">
         {{errorMessage}}
-      </alert>
+      </div>
     }
   </form>
 }
@@ -378,29 +459,34 @@
       <p>You only need x crystals to beat Ganon: Fast Ganon Goal</p>
     </div>
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="map-mode">Overworld
-        <span class="question-mark" container="body"
-          popover="Do you want to travel the overworld screen by screen?">
-          <i aria-hidden="true" class="fa fa-question-circle"></i>
-        </span>
-      </label>
+      <div class="col-sm-4 label-with-help">
+        <label class="control-label" for="map-mode">Overworld</label>
+        <app-help-popover
+          label="Overworld help"
+          text="Do you want to travel the overworld screen by screen?">
+        </app-help-popover>
+      </div>
       <div class="col-sm-8" id="map-mode">
-        <label btnRadio="no" class="btn btn-default" name="simple-map-button"
-        [(ngModel)]="mapSelected">Simple</label>
-        <label btnRadio="yes" class="btn btn-default" name="full-map-button"
+        <button type="button" class="btn btn-default" name="simple-map-button"
+          [class.active]="mapSelected === 'no'"
+          [attr.aria-pressed]="mapSelected === 'no'"
+          (click)="mapSelected = 'no'">Simple</button>
+        <button type="button" class="btn btn-default" name="full-map-button"
           [ngStyle]="{'display': isAdvancedOWEnabled}"
-        [(ngModel)]="mapSelected">Advanced (won't work if Inverted)</label>
+          [class.active]="mapSelected === 'yes'"
+          [attr.aria-pressed]="mapSelected === 'yes'"
+          (click)="mapSelected = 'yes'">Advanced (won't work if Inverted)</button>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-8">
-        <button class="btn btn-success" type="button" style="margin-right: 10px;"
+        <button class="btn btn-success" type="button"
           [disabled]="isGenerating"
           (click)="onGenerateNewSeed()">
           <i class="fa" [ngClass]="isGenerating ? 'fa-spinner fa-spin' : 'fa-magic'"></i>
           {{ isGenerating ? 'Generating...' : 'Generate Seed' }}
         </button>
-        <button class="btn btn-default" type="button" style="margin-right: 10px;" (click)="fileInput.click()">
+        <button class="btn btn-default" type="button" (click)="fileInput.click()">
           <i class="fa fa-upload"></i> Load Spoiler Log
         </button>
         <input #fileInput type="file" accept=".json,.txt" style="display:none"
@@ -414,9 +500,9 @@
       </div>
     </div>
     @if (errorMessage) {
-      <alert type="danger">
+      <div class="alert alert-danger" role="alert">
         {{errorMessage}}
-      </alert>
+      </div>
     }
   </form>
 }

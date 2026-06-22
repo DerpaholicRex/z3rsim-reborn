@@ -20,7 +20,10 @@
 }
 
 .container {
-  margin-top:3%
+  box-sizing:border-box;
+  width:calc(100% - 30px);
+  max-width:900px;
+  margin:3% auto 0
 }
 
 .deobf-banner {
@@ -63,17 +66,17 @@
   cursor:pointer
 }
 
-.dark-theme * .title {
+.dark-theme .title {
   color:var(--dark-text-color)
 }
 
 .version-text {
   font-size:14px;
-  color:#555
+  color:#d1d5db
 }
 
-.dark-theme * .version-text {
-  color:var(--dark-text-light-color)
+.dark-theme .version-text {
+  color:#f3f4f6
 }
 
 .in-between {
@@ -98,8 +101,30 @@ footer {
   z-index:5
 }
 
+footer img {
+  display:block
+}
+
+.footer-social-links {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  vertical-align:middle
+}
+
+.footer-social-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  line-height:1
+}
+
 .fa-twitter {
-  font-size:24px
+  display:block;
+  font-size:24px;
+  line-height:1
 }
 
 .green-text {
@@ -124,7 +149,8 @@ footer {
 
 @media (max-width:768px) {
   .container {
-    padding:0;
+    width:100%;
+    padding:0 8px;
     margin-top:0
   }
   .top-container {
@@ -135,9 +161,15 @@ footer {
   }
 }
 
-@media (max-width:992px) {
+@media (min-width:768px) and (max-width:991px) {
   .container {
-    width:100%
+    max-width:750px
+  }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+  .container {
+    max-width:900px
   }
 }
 

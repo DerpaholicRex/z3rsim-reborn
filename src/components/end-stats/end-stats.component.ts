@@ -3,14 +3,13 @@ import { GameService } from '../../services/game.service';
 import { ItemNamesService } from '../../services/item-names.service';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
-import { AccordionComponent, AccordionPanelComponent } from 'ngx-bootstrap/accordion';
 
 
 @Component({
     selector: 'app-end-stats',
     templateUrl: './end-stats.component.html',
     styleUrls: ['./end-stats.component.css'],
-    imports: [AccordionComponent, AccordionPanelComponent]
+    imports: []
 })
 export class EndStatsComponent implements OnInit {
   @Input() items: Items;

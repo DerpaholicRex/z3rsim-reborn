@@ -46,7 +46,7 @@ generated `dist/browser/` folder with any static HTTP server
 src/
   main.ts                 bootstrap entry
   polyfills.ts            core-js + zone.js
-  index.html              app shell (jQuery + Bootstrap JS)
+  index.html              app shell
   styles.css              global styles
   styles/                 vendored CSS (Font Awesome, Hammersmith One) + their fonts
   tsconfig.json

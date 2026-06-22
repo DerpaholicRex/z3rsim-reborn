@@ -36,16 +36,6 @@
                 "output": "/scripts"
               },
               {
-                "glob": "jquery-3.3.1.min.js",
-                "input": "",
-                "output": "/"
-              },
-              {
-                "glob": "bootstrap.min.js",
-                "input": "",
-                "output": "/"
-              },
-              {
                 "glob": "manifest.json",
                 "input": "",
                 "output": "/"
@@ -67,7 +57,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles/hammersmith-one.css",
               "src/styles/font-awesome.min.css",
               "src/styles.css"

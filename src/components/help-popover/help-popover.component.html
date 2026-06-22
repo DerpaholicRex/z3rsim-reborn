@@ -1,0 +1,17 @@
+<span class="help-popover">
+  <button
+    type="button"
+    class="help-popover-trigger"
+    [attr.aria-label]="label"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-describedby]="isOpen ? popoverId : null"
+    (click)="toggle()"
+    (keydown.escape)="close()">
+    <i aria-hidden="true" class="fa fa-question-circle"></i>
+  </button>
+  @if (isOpen) {
+    <span class="help-popover-panel" role="tooltip" [id]="popoverId">
+      {{ text }}
+    </span>
+  }
+</span>

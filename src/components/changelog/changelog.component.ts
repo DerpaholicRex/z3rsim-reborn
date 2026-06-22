@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AccordionComponent, AccordionPanelComponent } from 'ngx-bootstrap/accordion';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-changelog',
     templateUrl: './changelog.component.html',
     styleUrls: ['./changelog.component.css'],
-    imports: [AccordionComponent, AccordionPanelComponent]
+    imports: []
 })
 export class ChangelogComponent implements OnInit {
   constructor() {}

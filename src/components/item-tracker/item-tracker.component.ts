@@ -1,8 +1,9 @@
 import { GameService } from '../../services/game.service';
-import { Component, OnInit, Input, isDevMode } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Items } from '../../models/items.model';
 import { Config } from '../../models/config.model';
 import { Dungeon } from '../../models/dungeon.model';
+import { isDebug } from '../../debug';
 import { NgClass } from '@angular/common';
 import { TrackerNodeComponent } from '../tracker-node/tracker-node.component';
 
@@ -76,7 +77,7 @@ export class ItemTrackerComponent implements OnInit {
     if (itemName === 'boots') {
       this.config.noLogic = !this.config.noLogic;
     }
-    if (isDevMode()) {
+    if (isDebug()) {
       if (typeof this.items[itemName] == 'boolean') {
         if (this.items[itemName]) {
           this.items[itemName] = false;

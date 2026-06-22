@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
+import { trapFocus, restoreFocusAfterClose } from '../ui/focus-trap';
+import { ModalStateService } from '../../services/modal-state.service';
 import { WindowRef } from '../../services/window-ref.service';
-import { SeedService } from '../../services/seed.service';
 
 let appRef: AppComponent;
 
@@ -12,20 +13,30 @@ let appRef: AppComponent;
     styleUrls: ['./app.component.css'],
     standalone: false
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnDestroy, OnInit {
+  @ViewChild('howToCloseButton') howToCloseButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('howToModal') howToModal?: ElementRef<HTMLDivElement>;
+
   title = 'app';
   window: Window;
   isDarkTheme: boolean;
   buttonClass: string;
   colorMode: string;
-  modalRef: { hide: () => void };
+  isNavOpen: boolean;
+  isHowToOpen: boolean;
+  isReportModalOpen: boolean;
+  private howToModalTrigger?: HTMLElement;
+  private reportModalOpenSubscription?: Subscription;
 
   constructor(
     private _windowRef: WindowRef,
-    private _modalService: BsModalService,
     private _router: Router,
+    private _modalStateService: ModalStateService,
   ) {
     this.window = _windowRef.nativeWindow;
+    this.isNavOpen = false;
+    this.isHowToOpen = false;
+    this.isReportModalOpen = false;
   }
 
   ngOnInit() {
@@ -39,10 +50,43 @@ export class AppComponent implements OnInit {
     }
     this.onToggleTheme(false);
     this.setColorModeText();
+    this.reportModalOpenSubscription = this._modalStateService.reportModalOpen$.subscribe((isOpen) => {
+      this.isReportModalOpen = isOpen;
+      this.syncModalScrollLock();
+    });
   }
 
-  openModal(template: any) {
-    this.modalRef = this._modalService.show(template);
+  ngOnDestroy() {
+    this.reportModalOpenSubscription?.unsubscribe();
+    this.setModalScrollLock(false);
+  }
+
+  openHowToModal() {
+    this.howToModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : undefined;
+    this.isHowToOpen = true;
+    this.isNavOpen = false;
+    this.syncModalScrollLock();
+    setTimeout(() => this.howToCloseButton?.nativeElement.focus());
+  }
+
+  closeHowToModal() {
+    this.isHowToOpen = false;
+    this.syncModalScrollLock();
+    restoreFocusAfterClose(this.howToModalTrigger);
+    this.howToModalTrigger = undefined;
+  }
+
+  onHowToModalKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeHowToModal();
+      return;
+    }
+    trapFocus(event, this.howToModal?.nativeElement);
+  }
+
+  toggleNav() {
+    this.isNavOpen = !this.isNavOpen;
   }
 
   onToggleTheme(toggle = true) {
@@ -68,6 +112,18 @@ export class AppComponent implements OnInit {
   }
 
   redirect(route: string) {
+    this.isNavOpen = false;
     this._router.navigate(['/' + route]);
+  }
+
+  private syncModalScrollLock() {
+    this.setModalScrollLock(this.isHowToOpen || this.isReportModalOpen);
+  }
+
+  private setModalScrollLock(isOpen: boolean) {
+    const documentElement = this.window.document.documentElement;
+    const body = this.window.document.body;
+    documentElement.classList.toggle('modal-open', isOpen);
+    body.classList.toggle('modal-open', isOpen);
   }
 }

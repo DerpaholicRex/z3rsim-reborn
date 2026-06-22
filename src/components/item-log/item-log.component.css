@@ -9,11 +9,12 @@ hr {
 .item-log-body {
   height:400px;
   padding:10px;
-  overflow-y:scroll
+  overflow-y:auto
 }
 
-.dark-theme .item-log-body, .dark-theme .item-log-body {
-  background-color:#141414
+:host-context(.dark-theme) .item-log-body {
+  background-color:#111827;
+  color:#e5e7eb
 }
 
 .panel-heading {
@@ -24,12 +25,14 @@ hr {
   flex-wrap:nowrap
 }
 
-.dark-theme .panel-heading, .dark-theme .panel-heading {
-  background-color:#191970
+:host-context(.dark-theme) .panel-heading {
+  background-color:#1f2937;
+  color:#f3f4f6
 }
 
-.dark-theme .panel-heading, .dark-theme .panel-heading, .dark-theme .panel-info, .dark-theme .panel-info {
-  border-color:#7b68ee
+:host-context(.dark-theme) .panel-heading,
+:host-context(.dark-theme) .panel-info {
+  border-color:#4b5563
 }
 
 .form-control {
@@ -37,9 +40,14 @@ hr {
   width:100%
 }
 
-.dark-theme .form-control, .dark-theme .form-control {
+:host-context(.dark-theme) .form-control {
   color:var(--dark-text-color);
-  background-color:var(--dark-background-color)
+  background-color:#111827;
+  border-color:#4b5563
+}
+
+:host-context(.dark-theme) .form-control::placeholder {
+  color:#9ca3af
 }
 
 .btn-default.active {

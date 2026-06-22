@@ -8,10 +8,31 @@
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
-  background-color: #d3d3d3;
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-color: rgb(0 0 0 / 10%);
   border-radius: 5px;
+  padding: 4px;
+}
+
+.item-info-table td {
+  height: 44px;
+  vertical-align: middle;
+}
+
+.item-info-cell {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+}
+
+.icon-cell .item-info-cell {
+  justify-content: center;
+}
+
+.headerless-table {
+  margin-top: 12px;
 }
 
 :host-context(.dark-theme) h2 {

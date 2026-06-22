@@ -1,9 +1,47 @@
+@import "tailwindcss";
+@import "./styles/bootstrap-compat.css";
+
 :root {
   --dark-background-color: #141414;
   --dark-background-light-color: #444;
   --dark-background-med-color: #777;
   --dark-text-color: #eee;
   --dark-text-light-color: #bbb;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-sm leading-normal text-neutral-900;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  a {
+    @apply cursor-pointer text-sky-700 hover:underline;
+  }
+
+  h1 {
+    @apply mb-2 mt-5 text-4xl font-medium leading-tight;
+  }
+
+  h2 {
+    @apply mb-2 mt-5 text-3xl font-medium leading-tight;
+  }
+
+  h3 {
+    @apply mb-2 mt-5 text-2xl font-medium leading-tight;
+  }
+
+  h4 {
+    @apply mb-2 mt-2 text-lg font-medium leading-tight;
+  }
+
+  p {
+    @apply mb-2.5;
+  }
+
+  small {
+    @apply text-[65%] text-neutral-500;
+  }
 }
 
 html {
@@ -15,10 +53,6 @@ body {
   position: relative;
   margin: 0;
   min-height: 100%;
-}
-
-a {
-  cursor: pointer;
 }
 
 .stylized-font {
@@ -40,26 +74,11 @@ a {
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
-.dark-theme * .panel-default > .panel-heading,
-.dark-theme * .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: var(--dark-background-med-color);
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme p,
+.dark-theme label {
   color: var(--dark-text-color);
-}
-
-.dark-theme * .panel-body.card-block.card-body,
-.dark-theme * .table-striped > tbody > tr:nth-of-type(2n) {
-  background-color: var(--dark-background-light-color);
-  color: var(--dark-text-color);
-}
-
-.popover-content {
-  color: #000;
-}
-
-.dark-theme * .text-muted {
-  color: #fff;
-}
-
-.panel-body {
-  padding-bottom: 0;
 }

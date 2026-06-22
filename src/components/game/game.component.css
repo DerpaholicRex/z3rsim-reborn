@@ -4,7 +4,28 @@
 }
 
 .title {
-  margin-top:0
+  margin-top:0;
+  color:#1f2937
+}
+
+.title small {
+  color:#4b5563;
+  font-weight:400
+}
+
+.finished-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0 24px
+}
+
+:host-context(.dark-theme) .title {
+  color:var(--dark-text-color)
+}
+
+:host-context(.dark-theme) .title small {
+  color:#e5e7eb
 }
 
 h1 {

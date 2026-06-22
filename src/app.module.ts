@@ -4,15 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
-import { PopoverModule } from 'ngx-bootstrap/popover';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './components/app/app.component';
@@ -50,14 +41,6 @@ import { WindowRef } from './services/window-ref.service';
         FormsModule,
         HttpClientModule,
         AppRoutingModule,
-        AccordionModule,
-        AlertModule,
-        ButtonsModule,
-        CollapseModule,
-        ModalModule,
-        PopoverModule,
-        TabsModule,
-        TooltipModule,
         MainMenuComponent,
         GameComponent,
         AboutComponent,
@@ -77,11 +60,7 @@ import { WindowRef } from './services/window-ref.service';
         EndStatsComponent,
         ItemLogFilterPipe,
     ],
-    providers: [
-    ],
-    exports: [
-        ModalModule 
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
