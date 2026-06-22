@@ -2,9 +2,8 @@
 
 A reconstructed TypeScript source tree for **Z3R Simulator**, a tool
 for simulating Zelda: A Link to the Past Randomizer runs, originally
-published at 
-[z3rsim.com](https://z3rsim.com/) by
-[Kyong92](https://www.twitch.tv/kyong92).
+published at
+  [z3rsim-reborn](https://derpaholicrex.github.io/z3rsim-reborn/) originally by **Kyong92**.
 
 This fork adds **offline/fork functionality** including:
 - **Load Spoiler Log** - upload spoiler logs from [alttpr.com](https://alttpr.com/en/randomizer)
@@ -95,10 +94,8 @@ Everything else matches the original bundle.
 
 ## Credits
 
-Original simulator by **Kyong92** -
-[Twitch](https://www.twitch.tv/kyong92) •
-[Twitter](https://twitter.com/kyong92) •
-[Discord](https://discord.gg/nPJpFQB)
+Original simulator by **Kyong92**.
+Join the community at our [Discord](https://discord.gg/s3QNbeqxpD).
 
 This project is built on top of the public site rip preserved by
 **DerpaholicRex** at
