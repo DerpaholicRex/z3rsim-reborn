@@ -1,46 +1,76 @@
 @import "tailwindcss";
-@import "./styles/bootstrap-compat.css";
+@import "./styles/theme.css";
 
 :root {
-  --dark-background-color: #141414;
-  --dark-background-light-color: #444;
-  --dark-background-med-color: #777;
-  --dark-text-color: #eee;
-  --dark-text-light-color: #bbb;
+  --dark-background-color: var(--bg);
+  --dark-background-light-color: var(--surface-2);
+  --dark-background-med-color: var(--border-2);
+  --dark-text-color: var(--text);
+  --dark-text-light-color: var(--text-dim);
 }
 
 @layer base {
   body {
-    @apply bg-white text-sm leading-normal text-neutral-900;
-    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
 
   a {
-    @apply cursor-pointer text-sky-700 hover:underline;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   h1 {
-    @apply mb-2 mt-5 text-4xl font-medium leading-tight;
+    margin: 20px 0 10px;
+    color: var(--text);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.08;
   }
 
   h2 {
-    @apply mb-2 mt-5 text-3xl font-medium leading-tight;
+    margin: 20px 0 10px;
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 680;
+    letter-spacing: 0;
+    line-height: 1.15;
   }
 
   h3 {
-    @apply mb-2 mt-5 text-2xl font-medium leading-tight;
+    margin: 18px 0 8px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 650;
+    line-height: 1.2;
   }
 
   h4 {
-    @apply mb-2 mt-2 text-lg font-medium leading-tight;
+    margin: 10px 0 8px;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.2;
   }
 
   p {
-    @apply mb-2.5;
+    margin: 0 0 10px;
   }
 
   small {
-    @apply text-[65%] text-neutral-500;
+    color: var(--text-faint);
+    font-size: 65%;
   }
 }
 
@@ -55,8 +85,9 @@ body {
   min-height: 100%;
 }
 
-.stylized-font {
-  font-family: 'Hammersmith One', sans-serif;
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 .not-selectable {

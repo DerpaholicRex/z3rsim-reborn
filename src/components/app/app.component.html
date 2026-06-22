@@ -1,27 +1,31 @@
-<nav class="navbar"
+<nav class="nav"
      [class.dark-theme]="isDarkTheme"
      [attr.inert]="isHowToOpen || isReportModalOpen ? '' : null"
      [attr.aria-hidden]="isHowToOpen || isReportModalOpen ? 'true' : null">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle"
+  <div class="nav-inner">
+    <div class="nav-brand-row">
+      <button type="button" class="nav-toggle"
               aria-controls="app-navbar"
               [attr.aria-expanded]="isNavOpen"
               (click)="toggleNav()">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="visually-hidden">Toggle navigation</span>
+        <span class="nav-toggle-lines"></span>
       </button>
-      <button type="button" class="navbar-brand" (click)="redirect('')">
-        <span class="not-selectable title stylized-font">
-          Z3R Simulator : Reborn <span class="version-text">v1</span>
+      <button type="button" class="brand" (click)="redirect('')">
+        <span class="not-selectable title">
+          <span class="brand-mark">
+            <span class="brand-letter brand-letter--z">Z</span><span class="brand-letter brand-letter--three">3</span><span class="brand-letter brand-letter--r">R</span>
+          </span>
+          <span class="brand-copy">
+            <span>Simulator</span>
+            <small><span class="brand-reborn">Reborn</span> <span class="version-text brand-version">v1</span></small>
+          </span>
         </span>
       </button>
     </div>
 
-    <div class="navbar-collapse" id="app-navbar" [class.show]="isNavOpen">
-      <ul class="navbar-nav">
+    <div class="nav-collapse" id="app-navbar">
+      <ul class="nav-menu" [class.is-open]="isNavOpen">
         <li><button type="button" (click)="onToggleTheme()">
           <i class="{{buttonClass}}"></i> {{colorMode}}</button></li>
         <li><button type="button" (click)="openHowToModal()">How To Play</button></li>
@@ -32,11 +36,11 @@
     </div>
   </div>
 </nav>
-<div class="whole-app"
+<div class="app-shell whole-app"
      [class.dark-theme]="isDarkTheme"
      [attr.inert]="isHowToOpen ? '' : null"
      [attr.aria-hidden]="isHowToOpen ? 'true' : null">
-  <div class="container">
+  <div class="page-container">
     <!-- <div class="deobf-banner" role="alert">
       <strong>Deobfuscation project notice.</strong>
       This is a deobfuscated build of Z3R Simulator, published as a readable
@@ -65,29 +69,29 @@
 
 @if (isHowToOpen) {
   <div #howToModal
-       class="modal"
+       class="dialog-overlay"
        role="dialog"
        aria-modal="true"
        aria-labelledby="how-to-title"
        tabindex="-1"
        (click)="closeHowToModal()"
        (keydown)="onHowToModalKeydown($event)">
-    <div class="modal-dialog" [class.dark-theme]="isDarkTheme" (click)="$event.stopPropagation()">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="how-to-title">How to Play</h4>
-          <button #howToCloseButton type="button" class="close" aria-label="Close" (click)="closeHowToModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <div class="dialog" [class.dark-theme]="isDarkTheme" (click)="$event.stopPropagation()">
+      <div class="dialog-head">
+        <h4 class="dialog-title" id="how-to-title">How to Play</h4>
+        <button #howToCloseButton type="button" class="close-button" aria-label="Close" (click)="closeHowToModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <section class="how-to-section">
           <h3>Z3R Simulator</h3>
           <p>
-            Click on <span class="green-text outline-text">Green</span> locations to open them.
+            Click on <span class="green-text outline-text">Green</span><span class="how-to-color-block how-to-color-block--green" aria-hidden="true"></span> locations to open them.
             The Item Tracker and Log are updated automatically.
           </p>
           <p>
-            Click on any location with a <span class="white-text outline-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+            Click on any location with a <span class="how-to-search-chip white-text outline-text"><i class="fa fa-search" aria-hidden="true"></i></span>
             to check what item it is before getting it.
           </p>
           <p>
@@ -97,8 +101,7 @@
           </p>
           <p>
             Pay close attention to where you are in the map when travelling the Dark World,
-            you will need to use the right <img src="assets/node-icons/warp.png">
-            <span class="blue-text outline-text">Portals</span> to get to the right destinations.
+            you will need to use the right <span class="blue-text outline-text">Portals</span><span class="how-to-inline-image"><img src="assets/node-icons/warp.png" alt="" aria-hidden="true"></span> to get to the right destinations.
           </p>
           <p>
             You can search the Item Log to remember where you got something,
@@ -114,12 +117,14 @@
             You need to activate the flute in Kakariko and need to be on the correct locations to check maps.
             It'll take longer, but it's even more faithful to the original experience.
           </p>
+        </section>
+        <section class="how-to-section">
           <h3>Minor Glitches</h3>
           <p>
             If you activate <strong>Minor Glitches and Sequence Breaking</strong>,
             the following options are unlocked:
           </p>
-          <ul class="list-inline">
+          <ul class="how-to-bullets">
             <li>Dark Rooms</li>
             <li>Fake Flippers</li>
             <li>Water Walking</li>
@@ -128,9 +133,9 @@
             <li>Hovering</li>
           </ul>
           <p>
-            Locations colored <span class="glitched-text outline-text">Blue</span> are locations accessible through Minor Glitches
+            Locations colored <span class="glitched-text outline-text">Blue</span><span class="how-to-color-block how-to-color-block--blue" aria-hidden="true"></span> are locations accessible through Minor Glitches
           </p>
-        </div>
+        </section>
       </div>
     </div>
   </div>

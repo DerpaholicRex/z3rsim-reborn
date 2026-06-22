@@ -3,7 +3,7 @@
 This document outlines the strategic plan to upgrade the existing Angular 4.3.6 application to the latest stable Angular version (18+).
 
 ## Phase 1: Preparation & Assessment
-- **Dependency Audit**: Review `package.json` for breaking changes in libraries (`ngx-bootstrap`, `rxjs`).
+- **Dependency Audit**: Review `package.json` for breaking changes in libraries such as `rxjs`.
 - **TypeScript**: Align TypeScript version to the requirements of subsequent Angular versions.
 - **Node Environment**: Standardize local development on a supported Node LTS version.
 

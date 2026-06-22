@@ -77,62 +77,62 @@
 </div>
 <div class="menu-buttons">
   @if (items.gameState === 4) {
-    <button class="btn btn-danger" (click)="onSaveAndQuit()">
+    <button class="btn btn--danger" (click)="onSaveAndQuit()">
       Save &amp; Quit
     </button>
   }
   @if (canWarp()) {
-    <button class="btn btn-primary" (click)="onWarpClicked()">
+    <button class="btn btn--primary" (click)="onWarpClicked()">
       {{warpButtonText}}
     </button>
   }
   @if (canFlute()) {
-    <button class="btn btn-primary" (click)="onFluteClicked()">
+    <button class="btn btn--primary" (click)="onFluteClicked()">
       <img class="icon" src="assets/item-icons/flute.png">
     </button>
   }
   @if (!items.lwMapOpen && canViewMap('light-world')) {
-    <button class="btn btn-info" (click)="onCheckMap('lw')">
+    <button class="btn" (click)="onCheckMap('lw')">
       Check <img class="icon" src="assets/item-icons/map.png">
     </button>
   }
   @if (!items.dwMapOpen && canViewMap('dark-world')) {
-    <button class="btn btn-info" (click)="onCheckMap('dw')">
+    <button class="btn" (click)="onCheckMap('dw')">
       Check <img class="icon" src="assets/item-icons/map.png">
     </button>
   }
   @if (canViewMap('green-pendant')) {
-    <button class="btn btn-info" (click)="onCheckMap('gp')">
+    <button class="btn" (click)="onCheckMap('gp')">
       Check <img class="icon" src="assets/item-icons/pendantCourage.png">
     </button>
   }
   @if (canViewMap('red-crystals')) {
-    <button class="btn btn-info" (click)="onCheckMap('rc')">
+    <button class="btn" (click)="onCheckMap('rc')">
       Check <img class="icon" src="assets/item-icons/redCrystal.png">
     </button>
   }
   @if (!items.mmMedallionChecked && canViewMMMedallion() && !currentDungeon) {
-    <button class="btn btn-warning" (click)="checkMedallion('mm')">
+    <button class="btn" (click)="checkMedallion('mm')">
       Check <img class="icon" src="assets/dungeon-tracker-icons/boss82.png"><img class="icon" src="assets/dungeon-tracker-icons/medallion0.png">
     </button>
   }
   @if (!items.trMedallionChecked && canViewTRMedallion() && !currentDungeon) {
-    <button class="btn btn-warning" (click)="checkMedallion('tr')">
+    <button class="btn" (click)="checkMedallion('tr')">
       Check <img class="icon" src="assets/dungeon-tracker-icons/boss92.png"><img class="icon" src="assets/dungeon-tracker-icons/medallion0.png">
     </button>
   }
 
-  <button class="btn btn-danger aligned-right" (click)="openModal()">
+  <button class="btn btn--danger aligned-right" (click)="openModal()">
     Report Seed
   </button>
 </div>
 
 @if (isDebug) {
   <div class="debug-tools map-debug-tools" aria-label="Debug tools">
-    <button class="btn btn-warning debug-button" type="button" (click)="getAll()">
+    <button class="btn" type="button" (click)="getAll()">
       Get All
     </button>
-    <button class="btn btn-warning debug-button" type="button" (click)="getBootsDw()">
+    <button class="btn" type="button" (click)="getBootsDw()">
       Get Some
     </button>
   </div>
@@ -140,9 +140,8 @@
 </div>
 
 <div #reportModal
-     class="modal"
-     [style.display]="isModalOpen ? 'block' : 'none'"
-     [class.show]="isModalOpen"
+     class="dialog-overlay"
+     [style.display]="isModalOpen ? 'grid' : 'none'"
      [style.opacity]="isModalOpen ? '1' : '0'"
      [attr.aria-hidden]="!isModalOpen"
      [attr.aria-modal]="isModalOpen ? 'true' : null"
@@ -151,29 +150,29 @@
      aria-labelledby="report-seed-title"
      (keydown)="onReportModalKeydown($event)">
   
-  <div class="modal-dialog" (click)="$event.stopPropagation()">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title pull-left" id="report-seed-title">Report this Seed</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+  <div class="dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-content">
+      <div class="dialog-head">
+        <h4 class="dialog-title" id="report-seed-title">Report this Seed</h4>
+        <button type="button" class="close-button" aria-label="Close" (click)="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="dialog-body">
         <p>
           If you think this seed is impossible to complete, please describe the problem below and submit.
         </p>
-        <div class="form-group">
+        <div class="field-stack">
           <label for="report-description">Describe the issue:</label>
-          <textarea #reportDescriptionInput id="report-description" class="form-control" rows="4" [(ngModel)]="reportDescription" maxlength="2000"></textarea>
+          <textarea #reportDescriptionInput id="report-description" class="textarea" rows="4" [(ngModel)]="reportDescription" maxlength="2000"></textarea>
         </div>
       @if (reportMessage) {
-        <div class="alert alert-success">
+        <div class="alert alert--success">
           {{reportMessage}}
         </div>
       }
       @if (reportError) {
-        <div class="alert alert-danger">
+        <div class="alert alert--danger">
           {{reportError}}
         </div>
       }
@@ -181,11 +180,11 @@
         <p>{{clipboardMessage}}</p>
       }
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" (click)="submitReport()" [disabled]="isSubmittingReport">
+    <div class="dialog-foot">
+        <button class="btn btn--primary" type="button" (click)="submitReport()" [disabled]="isSubmittingReport">
           Submit Report
         </button>
-        <button class="btn btn-default" type="button" (click)="closeModal()">Close</button>
+        <button class="btn" type="button" (click)="closeModal()">Close</button>
       </div>
     </div>
   </div>

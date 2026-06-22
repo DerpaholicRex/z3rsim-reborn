@@ -495,24 +495,29 @@ export class MainMenuComponent implements OnInit {
   }
 
   showNotification(message: string, type: string) {
-    var cls = type === 'success' ? 'alert-success' : 'alert-danger';
+    var cls = type === 'success' ? 'alert--success' : 'alert--danger';
     var existing = document.querySelector('.' + cls + '-notification');
     if (existing) existing.remove();
 
     var notification = document.createElement('div');
-    notification.className = 'alert ' + cls + ' ' + type + '-notification';
+    notification.className = 'alert app-notification ' + cls + ' ' + cls + '-notification';
     notification.setAttribute('role', 'alert');
-    notification.style.position = 'fixed';
-    notification.style.top = '20px';
-    notification.style.right = '20px';
-    notification.style.zIndex = '9999';
-    notification.style.minWidth = '300px';
-    notification.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-    notification.innerHTML = '<strong>' + (type === 'success' ? 'Success:' : 'Error:') + '</strong> ' + message;
+
+    var body = document.createElement('span');
+    body.className = 'app-notification-body';
+
+    var label = document.createElement('strong');
+    label.textContent = type === 'success' ? 'Success:' : 'Error:';
+    body.appendChild(label);
+
+    var text = document.createElement('span');
+    text.textContent = message;
+    body.appendChild(text);
+    notification.appendChild(body);
 
     var closeBtn = document.createElement('button');
     closeBtn.setAttribute('type', 'button');
-    closeBtn.className = 'close';
+    closeBtn.className = 'close-button';
     closeBtn.setAttribute('aria-label', 'Close');
     closeBtn.innerHTML = '<span aria-hidden="true">&times;</span>';
     closeBtn.onclick = function() { notification.remove(); };

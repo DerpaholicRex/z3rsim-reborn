@@ -1,18 +1,18 @@
 <h2>GG, you saved the world, etc.</h2>
 
-<div class="ui-accordion">
-  <details class="ui-accordion-item" open>
+<div class="accordion end-stats-accordion">
+  <details class="accordion-item" open>
     <summary>Quest Performance</summary>
-    <div class="ui-accordion-content">
+    <div class="accordion-content">
     @for (table of getQuestPerformanceTables(); track $index) {
       <div>
         <h3>{{ table[0] }}</h3>
-        <table class="table table-striped">
+        <table class="table">
           <tbody>
             @for (row of table[1]; track $index) {
               <tr>
-                <td class="col-xs-6">{{ row[0] }}</td>
-                <td class="col-xs-6">{{ row[1] }}</td>
+                <td class="stat-cell">{{ row[0] }}</td>
+                <td class="stat-cell">{{ row[1] }}</td>
               </tr>
             }
           </tbody>
@@ -21,18 +21,18 @@
     }
       </div>
   </details>
-  <details class="ui-accordion-item">
+  <details class="accordion-item">
     <summary>Dungeon Info</summary>
-    <div class="ui-accordion-content">
+    <div class="accordion-content">
     @for (table of getDungeonInfoTables(); track $index) {
       <div>
         <h3>{{ table[0] }}</h3>
-        <table class="table table-striped">
+        <table class="table">
           <tbody>
             @for (row of table[1]; track $index) {
               <tr>
-                <td class="col-xs-6">{{ row[0] }}</td>
-                <td class="col-xs-6">{{ row[1] }}</td>
+                <td class="stat-cell">{{ row[0] }}</td>
+                <td class="stat-cell">{{ row[1] }}</td>
               </tr>
             }
           </tbody>
@@ -41,25 +41,25 @@
     }
       </div>
   </details>
-  <details class="ui-accordion-item">
+  <details class="accordion-item">
     <summary>Item Info</summary>
-    <div class="ui-accordion-content">
+    <div class="accordion-content">
     @for (table of getItemInfoTables(); track $index) {
       <div>
         <h3>{{ table[0] }}</h3>
-        <table class="table table-striped item-info-table">
+        <table class="table item-info-table">
           <tbody>
             @for (row of table[1]; track $index) {
               <tr>
-                <td class="col-xs-1 icon-cell">
+                <td class="icon-cell">
                   <span class="item-info-cell">
                     <img class="icon" [src]="'assets/item-icons/' + row[0] + '.png'">
                   </span>
                 </td>
-                <td class="col-xs-5">
+                <td class="item-name-cell">
                   <span class="item-info-cell">{{ row[1] }}</span>
                 </td>
-                <td class="col-xs-6">
+                <td class="stat-cell">
                   <span class="item-info-cell">{{ row[2] }}</span>
                 </td>
               </tr>
@@ -70,17 +70,17 @@
     }
       </div>
   </details>
-  <details class="ui-accordion-item">
+  <details class="accordion-item">
     <summary>Seed Info</summary>
-    <div class="ui-accordion-content">
+    <div class="accordion-content">
     @for (table of getSeedDataTables(); track $index) {
       <div>
-        <table class="table table-striped headerless-table">
+        <table class="table headerless-table">
           <tbody>
             @for (row of table[1]; track $index) {
               <tr>
-                <td class="col-xs-6">{{ row[0] }}</td>
-                <td class="col-xs-6">{{ row[1] }}</td>
+                <td class="stat-cell">{{ row[0] }}</td>
+                <td class="stat-cell">{{ row[1] }}</td>
               </tr>
             }
           </tbody>
