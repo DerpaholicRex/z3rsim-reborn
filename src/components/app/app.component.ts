@@ -100,6 +100,7 @@ export class AppComponent implements OnDestroy, OnInit {
       this.buttonClass = 'fa fa-sun-o';
       localStorage.setItem('isDarkTheme', 'false');
     }
+    this.window.document.documentElement.dataset.theme = this.isDarkTheme ? 'dark' : 'light';
     this.setColorModeText();
   }
 
@@ -123,7 +124,7 @@ export class AppComponent implements OnDestroy, OnInit {
   private setModalScrollLock(isOpen: boolean) {
     const documentElement = this.window.document.documentElement;
     const body = this.window.document.body;
-    documentElement.classList.toggle('modal-open', isOpen);
-    body.classList.toggle('modal-open', isOpen);
+    documentElement.classList.toggle('app-dialog-open', isOpen);
+    body.classList.toggle('app-dialog-open', isOpen);
   }
 }

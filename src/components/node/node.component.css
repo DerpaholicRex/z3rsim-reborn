@@ -40,31 +40,32 @@
 }
 
 .dungeon-unavailable, .unavailable, .unavailable-state {
-  background-color:#f08080
+  background-color:var(--unavailable)
 }
 
 .dungeon, .dungeon-state {
-  background-color:blue
+  background-color:var(--surface);
+  color:var(--accent)
 }
 
 .open, .open-state {
-  background-color:#90ee90
+  background-color:var(--available)
 }
 
 .glitched-open, .glitched-state {
-  background-color:#00bfff
+  background-color:var(--glitched)
 }
 
 .dun-defeated, .dun-open-state, .dungeon-defeated {
-  background-color:#add8e6
+  background-color:var(--pendant)
 }
 
 .view, .view-state {
-  background-color:gold
+  background-color:var(--accent)
 }
 
 .cleared, .defeated-boss, .dungeon-cleared, .dungeon-unavailable-cleared, .opened, .opened-state, .unavailable-open-state {
-  background-color:grey
+  background-color:var(--checked)
 }
 
 .cleared, .dungeon-cleared, .dungeon-unavailable-cleared, .opened, .opened-state, .unavailable, .unavailable-open-state, .unavailable-state {
@@ -79,7 +80,8 @@
   width:5%;
   height:5%;
   margin:-2.5% -2.5%;
-  border:solid #000;
+  border:2px solid rgb(0 0 0 / 68%);
+  border-radius:6px;
   background-size:cover
 }
 
@@ -92,7 +94,8 @@
 
 .dungeon-type, .in-dungeon-type {
   background-repeat:no-repeat;
-  border:solid #000
+  border:2px solid rgb(0 0 0 / 68%);
+  border-radius:7px
 }
 
 .in-dungeon-type {
