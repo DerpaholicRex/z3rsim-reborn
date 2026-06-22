@@ -1,23 +1,23 @@
 <h1 class="title"
   [attr.inert]="isReportModalOpen ? '' : null"
   [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
-  <small class="hidden-xs">{{ seedDescription }}</small>
+  <small class="mobile-hidden">{{ seedDescription }}</small>
 </h1>
 @if (gameState === 'loading') {
-  <div class="container">
+  <div class="panel panel-body">
     Loading...
   </div>
 }
 @if (gameState === 'playing') {
-  <div class="container-fluid">
-    <app-item-tracker class="col-md-3 col-sm-4 col-xs-3 game-obj"
+  <div class="game-stage">
+    <app-item-tracker class="game-side game-obj"
       [items]="items"
       [config]="config"
       [dungeonsData]="dungeonsData"
       [attr.inert]="isReportModalOpen ? '' : null"
       [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     </app-item-tracker>
-    <app-map class="col-md-6 col-sm-8 col-xs-9 game-obj"
+    <app-map class="game-map game-obj"
       [items]="items"
       [(currentMap)]="currentMap"
       [config]="config"
@@ -28,7 +28,7 @@
       (finishedDungeon)="onDungeonFinished($event)"
       (onGameFinished)="onGameFinished()">
     </app-map>
-    <app-item-log class="col-md-3 col-xs-12 game-obj"
+    <app-item-log class="game-log game-obj"
       [itemLogList]="itemLog"
       [items]="items"
       [attr.inert]="isReportModalOpen ? '' : null"
@@ -38,7 +38,7 @@
       [attr.inert]="isReportModalOpen ? '' : null"
       [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     </app-options>
-    <app-game-menu class="col-sm-6 game-obj"
+    <app-game-menu class="game-menu game-obj"
       [items]="items"
       [currentMap]="currentMap"
       [attr.inert]="isReportModalOpen ? '' : null"
@@ -47,7 +47,7 @@
   </div>
 }
 @if (gameState === 'finished') {
-  <div class="container">
+  <div class="results-shell">
     <div>
       <app-end-stats
         [items]="items"
@@ -55,9 +55,9 @@
       </app-end-stats>
     </div>
     <div class="finished-actions">
-      <button class="btn btn-primary" type="button" (click)="onBackMainMenu()">
+      <button class="btn btn--primary" type="button" (click)="onBackMainMenu()">
       Return to Main Menu</button>
-      <button class="btn btn-primary" type="button" (click)="onContinuePlaying()">
+      <button class="btn btn--primary" type="button" (click)="onContinuePlaying()">
       Continue Playing</button>
     </div>
   </div>
@@ -67,7 +67,7 @@
   <div class="debug-tools" aria-label="Debug tools"
     [attr.inert]="isReportModalOpen ? '' : null"
     [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
-    <button class="btn btn-warning debug-button" type="button" (click)="onCreditWarp()">
+    <button class="btn" type="button" (click)="onCreditWarp()">
       Credits Warp
     </button>
   </div>

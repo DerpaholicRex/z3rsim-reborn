@@ -1,7 +1,7 @@
-<div class="container-fluid">
-  <div>
+<div class="tracker-section">
+  <div class="tracker-grid tracker-grid--items">
     @for (item of itemsToTrack; track item) {
-      <app-tracker-node class="col-xs-5ths"
+      <app-tracker-node class="tracker-tile"
         [isItem]="true"
         [itemName]="item"
         [value]="items[item]"
@@ -12,11 +12,12 @@
     }
   </div>
 </div>
-<div class="container-fluid">
-  <div>
+<div class="tracker-section">
+  <div class="tracker-grid tracker-grid--dungeons"
+    [class.tracker-grid--compact-dungeons]="(config.dungeonItems !== 'standard' && config.dungeonItems !== 'mc') || config.isMystery">
     @for (dungeon of getDungeons(); track dungeon) {
-      <app-tracker-node class="col-xs-2"
-        [ngClass]="(config.dungeonItems !== 'standard' && config.dungeonItems !== 'mc') || config.isMystery ? 'col-xs-2' : 'col-xs-5ths'"
+      <app-tracker-node class="tracker-tile"
+        [ngClass]="(config.dungeonItems !== 'standard' && config.dungeonItems !== 'mc') || config.isMystery ? 'tracker-tile--compact' : 'tracker-tile--wide'"
         [isItem]="false"
         [dungeonData]="dungeon"
         [items]="items"
@@ -25,4 +26,8 @@
     }
   </div>
 </div>
-<span class="rupee-count">{{ items.stats.rupeeCount }} Rupees Collected</span>
+<span class="rupee-count">
+  <span class="rupee-value">{{ items.stats.rupeeCount }}</span>
+  <span class="rupee-label">Rupees</span>
+  <span class="rupee-label rupee-label--desktop">Collected</span>
+</span>

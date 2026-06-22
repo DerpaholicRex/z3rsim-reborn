@@ -1,7 +1,7 @@
-<div class="panel panel-info">
-  <div class="panel-heading">
+<div class="panel item-log-panel">
+  <div class="panel-head item-log-tools">
     <button
-      class="btn btn-default"
+      class="btn btn--option"
       [class.active]="filterArgs.onlyImportantShown"
       [attr.aria-pressed]="filterArgs.onlyImportantShown"
       name="showImportantButton"
@@ -9,16 +9,16 @@
       type="button"
       (click)="onToggleImportant()">
       <i aria-hidden="true" class="fa fa-filter"></i>
-      <span class="visible-xs-inline visible-sm-inline"> Filter Trash Items</span>
+      <span class="mobile-label"> Filter Trash Items</span>
     </button>
-    <input class="form-control"
+    <input class="input"
       name="searchForm"
       placeholder="Search"
       type="text"
       [(ngModel)]="filterArgs.searchQuery">
     @if (filterArgs.searchQuery !== '') {
       <button
-        class="btn btn-default"
+        class="btn btn--option"
         (click)="onCleanText()">
         <i aria-hidden="true" class="fa fa-times"></i>
       </button>

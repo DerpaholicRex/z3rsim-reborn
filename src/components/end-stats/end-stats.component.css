@@ -1,40 +1,79 @@
+:host {
+  display:block
+}
+
+h2 {
+  margin:0 0 18px;
+  color:var(--text)
+}
+
+h3 {
+  margin:14px 0 6px;
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.07em;
+  text-transform:uppercase
+}
+
 .stat-line {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  display:flex;
+  justify-content:space-between
+}
+
+.end-stats-accordion {
+  margin-top:8px
+}
+
+.table td:first-child {
+  color:var(--text-dim);
+  font-size:13px
+}
+
+.table td:last-child {
+  color:var(--text);
+  font-family:var(--game-text);
+  font-size:26px;
+  font-variant-numeric:tabular-nums
 }
 
 .icon {
-  display: block;
-  width: 36px;
-  height: 36px;
-  background-color: rgb(0 0 0 / 10%);
-  border-radius: 5px;
-  padding: 4px;
+  display:block;
+  width:32px;
+  height:32px;
+  padding:4px;
+  border:1px solid var(--tile-edge);
+  border-radius:var(--r-tile);
+  background:var(--tile-bg);
+  image-rendering:pixelated
 }
 
 .item-info-table td {
-  height: 44px;
-  vertical-align: middle;
+  height:44px;
+  vertical-align:middle
+}
+
+.item-info-table td:last-child {
+  color:var(--text-dim);
+  font-family:var(--sans);
+  white-space:normal
 }
 
 .item-info-cell {
-  display: flex;
-  min-height: 32px;
-  align-items: center;
+  display:flex;
+  min-height:32px;
+  align-items:center
 }
 
 .icon-cell .item-info-cell {
-  justify-content: center;
+  justify-content:center
+}
+
+.item-name-cell {
+  color:var(--text);
+  font-weight:600
 }
 
 .headerless-table {
-  margin-top: 12px;
-}
-
-:host-context(.dark-theme) h2 {
-  color: var(--dark-text-color);
+  margin-top:12px
 }

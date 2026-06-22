@@ -44,11 +44,11 @@ generated `dist/browser/` folder with any static HTTP server
 
 ```
 src/
-  main.ts                 bootstrap entry
+  main.ts                 Angular app entry
   polyfills.ts            core-js + zone.js
   index.html              app shell
   styles.css              global styles
-  styles/                 vendored CSS (Font Awesome, Hammersmith One) + their fonts
+  styles/                 bundled CSS and fonts
   tsconfig.json
   app.module.ts           NgModule (18 declarations, 4 providers)
   app-routing.module.ts   routes (/, /standard, /open, /inverted, …)
@@ -68,6 +68,8 @@ package.json              Angular 21.2.14 deps
 runSite.bat               Windows convenience script
 runSite.sh                Unix convenience script
 ```
+
+Third-party font and icon notices are tracked in `THIRD_PARTY.md`.
 
 The app builds into a self-contained `dist/` that can be served from
 any static host.

@@ -1,5 +1,10 @@
 #seed-num-input {
-  max-width:300px
+  max-width:none
+}
+
+.main-menu {
+  max-width:800px;
+  margin:0 auto 24px
 }
 
 .super-text {
@@ -11,139 +16,87 @@
   margin-bottom:60px
 }
 
-.mystery-info, .support-text {
+.mystery-info,
+.support-text {
   text-align:center
 }
 
+.mystery-info {
+  max-width:66ch;
+  margin:0 auto 12px;
+  color:var(--text-dim)
+}
+
 .seed-type-descriptor {
-  margin-bottom:0;
-  padding-top:7px
-}
-
-.label-with-help {
-  display:flex;
-  align-items:center;
-  gap:4px;
-  justify-content:flex-start
-}
-
-.label-with-help .control-label {
   margin-bottom:0
 }
 
 .mode-select-radio {
-  margin-bottom:10px
+  min-width:min(100%, 450px)
 }
 
 .open-mode-summary {
-  max-width:420px;
-  margin:15px auto 18px
-}
-
-.form-horizontal .open-mode-summary .form-group {
-  grid-template-columns:minmax(140px,max-content) minmax(120px,max-content);
-  justify-content:center;
-  gap:10px;
-  padding:2px 0
-}
-
-.form-horizontal .open-mode-summary .form-group > .col-sm-4 {
-  width:auto;
-  padding-top:0
-}
-
-.form-horizontal .open-mode-summary .control-label {
-  text-align:right
-}
-
-.form-horizontal .open-mode-summary .form-group > .seed-type-descriptor {
-  justify-self:start;
-  text-align:left
+  margin:0 auto 12px
 }
 
 .open-mode-controls {
-  margin-top:10px
+  display:grid;
+  gap:14px;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--border)
 }
 
-.form-horizontal .form-group > .col-sm-4,
-.form-horizontal .form-group > .col-sm-8,
-.form-horizontal .form-group > .col-sm-offset-4 {
-  float:none;
-  width:100%;
-  min-width:0
-}
-
-@media (min-width:768px) {
-  .label-with-help {
-    justify-content:flex-end;
-    text-align:right
-  }
-}
-
-.form-horizontal .form-group > .seed-type-descriptor,
-.form-horizontal .form-group > .col-sm-8 {
-  justify-self:stretch
-}
-
-.form-horizontal .form-group > .col-sm-8:not(.form-inline) {
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  align-items:center
-}
-
-.form-horizontal .form-group > .col-sm-8:not(.form-inline) > .btn {
-  flex:1 1 120px
-}
-
-.form-horizontal .form-group > .col-sm-8 > .form-control {
+.field-control > .input {
   flex:1 1 100%
 }
 
-.form-horizontal .form-group > .col-sm-offset-4.col-sm-8 {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center
+.main-menu .field-actions {
+  display:grid;
+  grid-template-columns:minmax(148px, max-content) minmax(165px, max-content) minmax(112px, 1fr);
+  align-items:stretch;
+  gap:10px 8px
 }
 
-.form-horizontal .form-group > .col-sm-offset-4.col-sm-8 .btn {
+.main-menu .field-actions .btn {
+  width:100%;
   margin-right:0!important
 }
 
-:host-context(.dark-theme) .control-label,
+.main-menu .field-actions .btn--primary {
+  min-width:112px;
+  padding-right:20px;
+  padding-left:20px
+}
+
+.main-menu .seed-info {
+  grid-column:1 / -1;
+  min-width:0;
+  margin-top:4px;
+  color:var(--text-dim);
+  font-family:var(--game-text);
+  font-size:24px;
+  line-height:1.45;
+  overflow-wrap:anywhere
+}
+
 :host-context(.dark-theme) .super-text,
 :host-context(.dark-theme) h3,
 :host-context(.dark-theme) p {
-  color:var(--dark-text-color)
+  color:var(--text)
 }
 
-:host-context(.dark-theme) .form-control {
-  color:var(--dark-text-color);
-  background-color:var(--dark-background-color)
-}
+@media (max-width:760px) {
+  .mode-select-radio {
+    min-width:0
+  }
 
-:host-context(.dark-theme) .form-control[disabled] {
-  color:var(--dark-text-color);
-  background-color:var(--dark-background-light-color)
-}
+  .field-control > .btn {
+    flex:1 1 100%
+  }
 
-:host-context(.dark-theme) .btn-default {
-  color:var(--dark-text-color);
-  background-color:var(--dark-background-color)
-}
+  .main-menu .field-actions {
+    grid-template-columns:1fr
+  }
 
-:host-context(.dark-theme) .active,
-:host-context(.dark-theme) .btn-default:active,
-:host-context(.dark-theme) .btn-default:focus,
-:host-context(.dark-theme) .btn-default:hover {
-  background-color:var(--dark-background-light-color)
-}
-
-:host-context(.dark-theme) .btn-default:active:hover {
-  background-color:var(--dark-background-med-color)
-}
-
-:host-context(.dark-theme) .btn.active {
-  box-shadow:inset 0 3px 5px rgba(0,0,0,.5)
 }
