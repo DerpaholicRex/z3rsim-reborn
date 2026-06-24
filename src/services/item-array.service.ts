@@ -98,13 +98,56 @@ export class ItemArrayService {
    * Generates seed metadata prefix string from spoiler log
    * This replaces scripts/generateSeedMetadataPrefix.js as a native Angular service
    */
-  generateSeedMetadataPrefix(spoilerLog: any): string {
+  generateSeedMetadataPrefix(spoilerLog: any, seedPatch?: any[]): string {
     if (!spoilerLog || !spoilerLog.meta) {
       throw new Error('Invalid spoiler log: missing meta section');
     }
 
     var meta = spoilerLog.meta;
     var special = spoilerLog.Special;
+
+    function getPatchByte(patch: any[], address: number): number | null {
+      if (!patch) {
+        return null;
+      }
+
+      for (var i = 0; i < patch.length; i++) {
+        var entry = patch[i];
+        if (!entry) {
+          continue;
+        }
+
+        for (var key in entry) {
+          if (!entry.hasOwnProperty(key)) {
+            continue;
+          }
+
+          var start = +key;
+          var value = entry[key];
+          if (Array.isArray(value) && start <= address && address < start + value.length) {
+            var patchValue = value[address - start];
+            if (typeof patchValue === 'number') {
+              return patchValue;
+            }
+          }
+        }
+      }
+
+      return null;
+    }
+
+    function getCrystalRequirement(value: string, patch: any[], address: number): string {
+      if (/^[0-7]$/.test(value || '')) {
+        return value;
+      }
+
+      var patchValue = getPatchByte(patch, address);
+      if (patchValue !== null && patchValue >= 0 && patchValue <= 7) {
+        return patchValue.toString();
+      }
+
+      return '7';
+    }
 
     function stripSuffix(name) {
       return name.replace(/:1$/, '');
@@ -116,8 +159,8 @@ export class ItemArrayService {
     positionMappings[21] = meta.dungeon_items === 'standard' ? '0' : meta.dungeon_items === 'mc' ? '1' : meta.dungeon_items === 'mcs' ? '2' : meta.dungeon_items === 'full' ? '3' : '0';
     positionMappings[22] = meta.accessibility === 'items' ? '0' : meta.accessibility === 'locations' ? '1' : meta.accessibility === 'none' ? '2' : '0';
     positionMappings[23] = meta.goal === 'ganon' ? '0' : meta.goal === 'dungeons' ? '1' : meta.goal === 'pedestal' ? '2' : meta.goal === 'triforce' ? '3' : meta.goal === 'fast_ganon' ? '4' : '0';
-    positionMappings[24] = meta.entry_crystals_tower || '0';
-    positionMappings[25] = meta.entry_crystals_ganon || '0';
+    positionMappings[24] = getCrystalRequirement(meta.entry_crystals_tower, seedPatch, 0x18019A);
+    positionMappings[25] = getCrystalRequirement(meta.entry_crystals_ganon, seedPatch, 0x1801A6);
     positionMappings[26] = meta.mode === 'standard' ? '0' : meta.mode === 'open' ? '1' : meta.mode === 'inverted' ? '2' : '0';
     positionMappings[27] = (meta.enemizer || 'none') === 'none' ? '0' : meta.enemizer === 'simple' ? '1' : meta.enemizer === 'full' ? '2' : meta.enemizer === 'random' ? '3' : '0';
     positionMappings[28] = meta.weapons === 'randomized' ? '0' : meta.weapons === 'assured' ? '1' : meta.weapons === 'vanilla' ? '2' : meta.weapons === 'swordless' ? '3' : '0';

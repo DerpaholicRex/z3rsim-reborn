@@ -33,6 +33,7 @@
   --brand-highlight: linear-gradient(180deg, rgb(0 0 0 / 0) 15%, rgb(59 17 62 / 62%) 49%, rgb(0 0 0 / 0) 51%);
   --available: #0a8a4b;
   --unavailable: #e11d48;
+  --warning: #b7791f;
   --glitched: #0284c7;
   --checked: #6b7480;
   --crystal: #dc2645;
@@ -68,6 +69,7 @@
   --brand-highlight: linear-gradient(180deg, rgb(255 255 255 / 0%) 10%, rgb(255 250 225 / 95%) 49%, rgb(255 255 255 / 0%) 51%);
   --available: #34d399;
   --unavailable: #fb7185;
+  --warning: #fbbf24;
   --glitched: #38bdf8;
   --checked: #5b6270;
   --crystal: #f0586b;
@@ -571,6 +573,11 @@
   .alert--danger {
     border-color: color-mix(in oklab, var(--unavailable) 45%, var(--border));
     background: color-mix(in oklab, var(--unavailable) 12%, var(--surface-2));
+  }
+
+  .alert--warning {
+    border-color: color-mix(in oklab, var(--warning) 48%, var(--border));
+    background: color-mix(in oklab, var(--warning) 14%, var(--surface-2));
   }
 
   .app-notification {

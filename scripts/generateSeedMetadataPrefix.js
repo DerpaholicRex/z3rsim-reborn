@@ -5,7 +5,7 @@ function stripSuffix(name) {
 
 
 // Function to generate seed metadata prefix string from spoiler log
-function generateSeedMetadataPrefix(spoilerLog) {
+function generateSeedMetadataPrefix(spoilerLog, seedPatch) {
     if (!spoilerLog || !spoilerLog.meta) {
         throw new Error('Invalid spoiler log: missing meta section');
     }
@@ -13,6 +13,50 @@ function generateSeedMetadataPrefix(spoilerLog) {
     const meta = spoilerLog.meta;
 
     const special = spoilerLog.Special;
+
+    function getPatchByte(patch, address) {
+        if (!patch) {
+            return null;
+        }
+
+        for (let i = 0; i < patch.length; i++) {
+            const entry = patch[i];
+            if (!entry) {
+                continue;
+            }
+
+            for (const key in entry) {
+                if (!entry.hasOwnProperty(key)) {
+                    continue;
+                }
+
+                const start = +key;
+                const value = entry[key];
+                if (Array.isArray(value) && start <= address && address < start + value.length) {
+                    const patchValue = value[address - start];
+                    if (typeof patchValue === 'number') {
+                        return patchValue;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    function getCrystalRequirement(value, patch, address) {
+        if (/^[0-7]$/.test(value || '')) {
+            return value;
+        }
+
+        const patchValue = getPatchByte(patch, address);
+        if (patchValue !== null && patchValue >= 0 && patchValue <= 7) {
+            return patchValue.toString();
+        }
+
+        return '7';
+    }
+
     // Position mappings based on collectSeedMetadata function
     const positionMappings = {
         // Position 20: item_placement
@@ -45,11 +89,11 @@ function generateSeedMetadataPrefix(spoilerLog) {
             'fast_ganon': '4'
         }[meta.goal] || '0',
 
-        // Position 24: entry_crystals_tower (direct value)
-        24: meta.entry_crystals_tower || '0',
+        // Position 24: entry_crystals_tower
+        24: getCrystalRequirement(meta.entry_crystals_tower, seedPatch, 0x18019A),
 
-        // Position 25: entry_crystals_ganon (direct value)
-        25: meta.entry_crystals_ganon || '0',
+        // Position 25: entry_crystals_ganon
+        25: getCrystalRequirement(meta.entry_crystals_ganon, seedPatch, 0x1801A6),
 
         // Position 26: mode
         26: {
