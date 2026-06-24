@@ -30,7 +30,6 @@
           <i class="{{buttonClass}}"></i> {{colorMode}}</button></li>
         <li><button type="button" (click)="openHowToModal()">How To Play</button></li>
         <li><button type="button" (click)="redirect('changelog')">Changelog</button></li>
-        <li><button type="button" (click)="redirect('support')">Support Us</button></li>
         <li><button type="button" (click)="redirect('about')">About</button></li>
       </ul>
     </div>
@@ -58,7 +57,7 @@
     [attr.inert]="isReportModalOpen ? '' : null"
     [attr.aria-hidden]="isReportModalOpen ? 'true' : null">
     <p>
-      Join our <a href="https://discord.gg/s3QNbeqxpD" target="_blank">Z3R Community Discord</a>
+      Join our <a href="https://discord.gg/s3QNbeqxpD" target="_blank" rel="noopener">Z3R Community Discord</a>
     </p>
     <p>
       Community Maintained project - originally developed by Kyong92
