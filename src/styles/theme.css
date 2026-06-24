@@ -796,33 +796,6 @@
     padding-top: 36px;
   }
 
-  .patron-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .patron {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 9px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--r-tile);
-    background: var(--surface);
-    font-weight: 600;
-  }
-
-  .patron--gold {
-    color: #d9a441;
-  }
-
-  .patron--silver {
-    color: #aab4c0;
-  }
-
   .visually-hidden {
     position: absolute;
     width: 1px;

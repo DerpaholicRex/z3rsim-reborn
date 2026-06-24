@@ -10,7 +10,6 @@ import { AppComponent } from './components/app/app.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { GameComponent } from './components/game/game.component';
 import { AboutComponent } from './components/about/about.component';
-import { SupportComponent } from './components/support/support.component';
 import { ChangelogComponent } from './components/changelog/changelog.component';
 import { TpLogComponent } from './components/tp-log/tp-log.component';
 import { TpLogRedirectComponent } from './components/tp-log-redirect/tp-log-redirect.component';
@@ -44,7 +43,6 @@ import { WindowRef } from './services/window-ref.service';
         MainMenuComponent,
         GameComponent,
         AboutComponent,
-        SupportComponent,
         ChangelogComponent,
         TpLogComponent,
         TpLogRedirectComponent,
