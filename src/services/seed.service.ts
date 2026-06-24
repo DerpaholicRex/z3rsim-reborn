@@ -8,6 +8,7 @@ import { ItemArrayService } from './item-array.service';
 export class SeedService {
   _apiUrl: string;
   webVersion: string;
+  defaultSeedMetadataPrefix: string;
   lastSeedTimestamp: number;
   lastSeedParams: { [key: string]: string };
   lastSeed: { [key: string]: any };
@@ -18,6 +19,7 @@ export class SeedService {
   ) {
     this._apiUrl = 'https://lttp-rando-seed-api.glitch.me/';
     this.webVersion = '4.1';
+    this.defaultSeedMetadataPrefix = '000001xXJAo0A0ebe3WP10000010022000000000';
     if (true /* environment.production */) {
       this._apiUrl = 'https://lttp-rando-seed-api.glitch.me/';
     } else {
@@ -39,13 +41,55 @@ export class SeedService {
       : 'BrXZ47EgQR4Qq8A: (Using Default Seed)';
     return seedStr;
   }
+
+  getSeedMetadataPrefix(): string {
+    var prefix = localStorage.getItem('seedMetadataPrefix');
+    if (this.isSeedMetadataPrefixValid(prefix)) {
+      return prefix;
+    }
+
+    if (prefix) {
+      localStorage.removeItem('seedMetadataPrefix');
+      localStorage.removeItem('itemArray');
+    }
+
+    return this.defaultSeedMetadataPrefix;
+  }
+
+  isSeedMetadataPrefixValid(prefix: string): boolean {
+    if (!prefix || prefix.length !== 40) {
+      return false;
+    }
+
+    var fields: [number, RegExp][] = [
+      [20, /^[01]$/],
+      [21, /^[0-3]$/],
+      [22, /^[0-2]$/],
+      [23, /^[0-4]$/],
+      [24, /^[0-7]$/],
+      [25, /^[0-7]$/],
+      [26, /^[0-2]$/],
+      [27, /^[0-3]$/],
+      [28, /^[0-3]$/],
+      [29, /^[0-2]$/],
+      [30, /^[0-2]$/],
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      if (!fields[i][1].test(prefix.charAt(fields[i][0]))) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   getSeed(mode: string, params: any, isDaily = false, isQuals = false) {
     var url;
     var online = false;
     var seedStr = this.buildStringLabel();
     const fakeObservable = {
-      prefix:
-        localStorage.getItem('seedMetadataPrefix') || '000001xXJAo0A0ebe3WP10000010022000000000',
+      prefix: this.getSeedMetadataPrefix(),
       itemArray: localStorage.getItem('itemArray'),
       seedData: {
         seed: seedStr,
@@ -131,7 +175,7 @@ export class SeedService {
     }
   }
 
-  loadAndGenerateItemArray(): Promise<any[]> {
+  loadAndGenerateItemArray(seedPatch?: any[]): Promise<any[]> {
     var me = this;
     return new Promise(function(resolve, reject) {
       try {
@@ -154,7 +198,7 @@ export class SeedService {
           var detailedMap = results[2];
 
           // Generate seed metadata prefix
-          var seedPrefix = me._itemArrayService.generateSeedMetadataPrefix(spoilerLog);
+          var seedPrefix = me._itemArrayService.generateSeedMetadataPrefix(spoilerLog, seedPatch);
           localStorage.setItem('seedMetadataPrefix', seedPrefix);
 
           // Generate the item array

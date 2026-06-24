@@ -436,7 +436,7 @@ export class MainMenuComponent implements OnInit {
       me._seedService.saveSpoilerLogToLocalStorage(spoilerData.spoiler);
       localStorage.setItem('seedHash', spoilerData && spoilerData.hash);
 
-      me._seedService.loadAndGenerateItemArray().then(function(itemArray) {
+      me._seedService.loadAndGenerateItemArray(spoilerData && spoilerData.patch).then(function(itemArray) {
         console.log('Item array generated:', itemArray && itemArray.length, 'locations');
         localStorage.setItem('itemArray', itemArray ? itemArray.join('') : '');
         me.showNotification('New seed generated successfully!', 'success');
@@ -467,19 +467,37 @@ export class MainMenuComponent implements OnInit {
     reader.onload = function() {
       try {
         var text = reader.result as string;
-        var spoilerLogData = JSON.parse(text);
-        var seed = me._seedService.extractSeedHash(file.name);
+        var uploadData = JSON.parse(text);
+        var isFullSeedResponse = uploadData && uploadData.spoiler && uploadData.spoiler.meta;
+        var spoilerLogData = isFullSeedResponse ? uploadData.spoiler : uploadData;
+        var seedPatch = isFullSeedResponse ? uploadData.patch : null;
+        var hasPatch = Array.isArray(seedPatch);
+        var seed = (isFullSeedResponse && uploadData.hash) || me._seedService.extractSeedHash(file.name);
+
+        if (!spoilerLogData || !spoilerLogData.meta) {
+          throw new Error('Invalid spoiler log file: missing meta section');
+        }
+
+        var hasRandomCrystals =
+          spoilerLogData.meta.entry_crystals_tower === 'random' ||
+          spoilerLogData.meta.entry_crystals_ganon === 'random';
+
         if (seed) {
           localStorage.setItem('seedHash', seed);
         }
         me._seedService.saveSpoilerLogToLocalStorage(spoilerLogData);
-        me._seedService.loadAndGenerateItemArray().then(function(itemArray) {
+        me._seedService.loadAndGenerateItemArray(seedPatch).then(function(itemArray) {
           if (itemArray) {
             localStorage.setItem('itemArray', itemArray.join(''));
           }
         });
-        
-        me.showNotification('Spoiler log successfully loaded! Reloading page...', 'success');
+
+        if (hasRandomCrystals && !hasPatch) {
+          me.showNotification('Spoiler log loaded. Random crystal requirements could not be resolved from this spoiler log, defaulting to 7/7.', 'warning');
+        } else {
+          me.showNotification('Spoiler log successfully loaded!', 'success');
+        }
+
         if(!localStorage.getItem('seedHash')){
           me.shouldDisablePlay = true;
         }else {
@@ -495,8 +513,8 @@ export class MainMenuComponent implements OnInit {
   }
 
   showNotification(message: string, type: string) {
-    var cls = type === 'success' ? 'alert--success' : 'alert--danger';
-    var existing = document.querySelector('.' + cls + '-notification');
+    var cls = type === 'success' ? 'alert--success' : type === 'warning' ? 'alert--warning' : 'alert--danger';
+    var existing = document.querySelector('.app-notification');
     if (existing) existing.remove();
 
     var notification = document.createElement('div');
@@ -507,7 +525,7 @@ export class MainMenuComponent implements OnInit {
     body.className = 'app-notification-body';
 
     var label = document.createElement('strong');
-    label.textContent = type === 'success' ? 'Success:' : 'Error:';
+    label.textContent = type === 'success' ? 'Success:' : type === 'warning' ? 'Warning:' : 'Error:';
     body.appendChild(label);
 
     var text = document.createElement('span');
