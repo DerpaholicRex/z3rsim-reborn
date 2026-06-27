@@ -411,6 +411,23 @@ export class DungeonItemsComponent implements OnDestroy, OnInit {
             this.addPrizes(node, this.currentDungeon.name);
           }
           node.originalNode.status = NodeStatus.OPEN_CHEST.toString();
+          
+          /** Repair a scenario where on initial game load this dungeons data is apparently not pass by reference for some reason
+           * from looking at the cases above, it seems this is a problem the original developer faced as well,
+           * and worked around (see spectacle rock item, or the locked door status above)
+           * */
+
+          // Flatten all maps across all dungeons, find the matching map, and locate the node
+          const gameServiceNode = this.gameService.dungeonsData
+            .flatMap(d => d.dungeonMaps)
+            .find(m => m.id === this.currentDungeonMap.id)
+            ?.nodes?.find(n => n.mapNode.id === node.id);
+
+          // repair the desync if needed
+          if(gameServiceNode && gameServiceNode.status != node.originalNode.status){
+            console.log("repairing desynced status")
+            gameServiceNode.status = node.originalNode.status;
+          }
           break;
         case NodeStatus.BOSS:
           if (this.currentDungeon.name === 'Ganons Tower' && node.tooltip !== 'Agahnim 2') {
